@@ -10,16 +10,16 @@ const router = createRouter({
       name: 'home',
       component: HomeView
     },
-    {
-      path: '/',
-      name: 'news',
-      component: HomeView
-    },
-    {
-      path: '/',
-      name: 'in theaters',
-      component: HomeView
-    },
+    // {
+    //   path: '/',
+    //   name: 'news',
+    //   component: HomeView
+    // },
+    // {
+    //   path: '/',
+    //   name: 'in theaters',
+    //   component: HomeView
+    // },
     {
       path: "/landing",
       name: 'Landing',

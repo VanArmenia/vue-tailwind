@@ -14,7 +14,8 @@ module.exports = {
         'hero-pattern': "url('./assets/img/kimkiduk-min.jpg')",
       },
       colors: {
-        'dark-amber': '#534836',
+        'dark-amber': '#24201a',
+        'lighter-amber': '#302e2a',
       },
     }
   },

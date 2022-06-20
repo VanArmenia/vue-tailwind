@@ -3,7 +3,7 @@
     <navbar-component></navbar-component>
     <main>
       <div class="relative pt-16 pb-48 flex content-center items-center justify-center"
-        style="min-height: 30vh;">
+        style="min-height: 20vh;">
         <div class="absolute top-0 w-full h-full bg-contain bg-hero-pattern">
           <span id="blackOverlay" class="w-full h-full absolute opacity-30 bg-black"></span>
         </div>
@@ -23,213 +23,163 @@
           style="height: 70px;"
         >
         </div>
-        <form class="absolute bottom-3 right-3">
-          <div class="flex">
-            <label for="search-dropdown" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">Your Email</label>
-            <button id="dropdown-button" data-dropdown-toggle="dropdown" class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-amber-600 border border-amber-600 rounded-l-lg hover:bg-gray-200 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button">All categories <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg></button>
-            <div id="dropdown" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700" data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="top" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(897px, 5637px, 0px);">
-              <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
-                <li>
-                  <button type="button" class="inline-flex py-2 px-4 w-full hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Design</button>
-                </li>
-                <li>
-                  <button type="button" class="inline-flex py-2 px-4 w-full hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Logos</button>
-                </li>
-              </ul>
+        <div class="flex absolute bottom-3 right-3 w-full justify-between px-6">
+          <ul class="flex gap-5 text-cyan-600 font-anton tracking-wider bg-dark-amber p-3">
+            <li><a href="#">SHOW ALL</a></li>
+            <li><a href="#">LATEST TRAILERS</a></li>
+            <li><a href="#">TOP RATED</a></li>
+            <li><a href="#">MOST COMMENTED</a></li>
+          </ul>
+          <form >
+            <div class="flex">
+              <label for="search-dropdown" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">Your Email</label>
+              <button id="dropdown-button" data-dropdown-toggle="dropdown" class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-amber-600 border border-amber-600 rounded-l-lg hover:bg-gray-200 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button">All categories <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg></button>
+              <div id="dropdown" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700" data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="top" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(897px, 5637px, 0px);">
+                <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
+                  <li>
+                    <button type="button" class="inline-flex py-2 px-4 w-full hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Design</button>
+                  </li>
+                  <li>
+                    <button type="button" class="inline-flex py-2 px-4 w-full hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Logos</button>
+                  </li>
+                </ul>
+              </div>
+              <div class="relative w-full">
+                <input type="search" id="search-dropdown" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-dark-amber rounded-r-lg border-l-black border-l-2 border border-gray-900  dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white " placeholder="Search Mockups, Logos, Design Templates..." required>
+                <button type="submit" class="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>
+              </div>
             </div>
-            <div class="relative w-full">
-              <input type="search" id="search-dropdown" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-dark-amber rounded-r-lg border-l-black border-l-2 border border-gray-900  dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white " placeholder="Search Mockups, Logos, Design Templates..." required>
-              <button type="submit" class="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>
-            </div>
-          </div>
-        </form>
+          </form>
+        </div>
+
       </div>
-      <section class="pb-20 bg-dark-amber pt-6">
+      <section class="pb-20 bg-dark-amber pt-0.5 text-amber-200">
         <div class="container mx-auto px-4">
-          <div class="flex flex-wrap mt-16">
+          <div class="flex flex-wrap mt-4">
             <div id="content" class="w-full">
-              <div class="box w-full flex">
-                <div class="head">
-                  <h2>LATEST TRAILERS</h2>
-                  <p class="text-right"><a href="#">See all</a></p>
-                </div>
-                <div class="movie">
-                  <div class="movie-image"> <span class="hidden"><span class="name">X-MAN</span></span> <a href="#"><img src="../assets/img/team-3-800x800.jpg" alt="" /></a> </div>
-                  <div class="rating">
-                    <p>RATING</p>
-                    <div class="stars">
-                      <div class="stars-in"> </div>
-                    </div>
-                    <span class="comments">12</span> </div>
-                </div>
-                <div class="movie">
-                  <div class="movie-image"> <span class="hidden"><span class="name">SPIDER MAN 2</span></span> <a href="#"><img src="../assets/img/team-3-800x800.jpg" alt="" /></a> </div>
-                  <div class="rating">
-                    <p>RATING</p>
-                    <div class="stars">
-                      <div class="stars-in"> </div>
-                    </div>
-                    <span class="comments">12</span> </div>
-                </div>
-                <div class="movie">
-                  <div class="movie-image"> <span class="hidden"><span class="name">SPIDER MAN 3</span></span> <a href="#"><img src="../assets/img/team-3-800x800.jpg" alt="" /></a> </div>
-                  <div class="rating">
-                    <p>RATING</p>
-                    <div class="stars">
-                      <div class="stars-in"> </div>
-                    </div>
-                    <span class="comments">12</span> </div>
-                </div>
-                <div class="movie">
-                  <div class="movie-image"> <span class="hidden"><span class="name">VALKYRIE</span></span> <a href="#"><img src="../assets/img/team-3-800x800.jpg" alt="" /></a> </div>
-                  <div class="rating">
-                    <p>RATING</p>
-                    <div class="stars">
-                      <div class="stars-in"> </div>
-                    </div>
-                    <span class="comments">12</span> </div>
-                </div>
-                <div class="movie">
-                  <div class="movie-image"> <span class="hidden"><span class="name">GLADIATOR</span></span> <a href="#"><img src="../assets/img/team-3-800x800.jpg" alt="" /></a> </div>
-                  <div class="rating">
-                    <p>RATING</p>
-                    <div class="stars">
-                      <div class="stars-in"> </div>
-                    </div>
-                    <span class="comments">12</span> </div>
-                </div>
-                <div class="movie last">
-                  <div class="movie-image"> <span class="hidden"><span class="name">ICE AGE</span></span> <a href="#"><img src="../assets/img/team-3-800x800.jpg" alt="" /></a> </div>
-                  <div class="rating">
-                    <p>RATING</p>
-                    <div class="stars">
-                      <div class="stars-in"> </div>
-                    </div>
-                    <span class="comments">12</span> </div>
-                </div>
-                <div class="cl">&nbsp;</div>
+              <div class="h-6 flex justify-between border-b-amber-100 border-b-2 mb-2">
+                <h2 class="text-xs font-anton tracking-widest">LATEST TRAILERS</h2>
+                <p class=""><a href="#">See all</a></p>
               </div>
-              <div class="box w-full flex">
-                <div class="head">
-                  <h2>TOP RATED</h2>
-                  <p class="text-right"><a href="#">See all</a></p>
-                </div>
-                <div class="movie">
-                  <div class="movie-image"> <span class="play"><span class="name">TRANSFORMERS</span></span> <a href="#"><img src="css/images/movie7.jpg" alt="" /></a> </div>
-                  <div class="rating">
-                    <p>RATING</p>
-                    <div class="stars">
-                      <div class="stars-in"> </div>
+              <div class="box w-full grid grid-cols-5 gap-4">
+                <div class="movie shadow bg-lighter-amber pb-4">
+                  <div class="movie-image"> <span class="hidden"><span class="name">X-MAN</span></span> <a href="#"><img src="../assets/img/team-4-470x470.png" alt="" /></a> </div>
+                  <div class="rating flex justify-between p-2">
+                    <div class="flex">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                      <span class="comments">10</span>
                     </div>
-                    <span class="comments">12</span> </div>
-                </div>
-                <div class="movie">
-                  <div class="movie-image"> <span class="play"><span class="name">MAGNETO</span></span> <a href="#"><img src="css/images/movie8.jpg" alt="" /></a> </div>
-                  <div class="rating">
-                    <p>RATING</p>
-                    <div class="stars">
-                      <div class="stars-in"> </div>
                     </div>
-                    <span class="comments">12</span> </div>
                 </div>
-                <div class="movie">
-                  <div class="movie-image"> <span class="play"><span class="name">KUNG FU PANDA</span></span> <a href="#"><img src="css/images/movie9.jpg" alt="" /></a> </div>
-                  <div class="rating">
-                    <p>RATING</p>
-                    <div class="stars">
-                      <div class="stars-in"> </div>
+                <div class="movie shadow bg-lighter-amber pb-4">
+                  <div class="movie-image"> <span class="hidden"><span class="name">X-MAN</span></span> <a href="#"><img src="../assets/img/team-4-470x470.png" alt="" /></a> </div>
+                  <div class="rating flex justify-between p-2">
+                    <div class="flex">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                      <span class="comments">10</span>
                     </div>
-                    <span class="comments">12</span> </div>
+                  </div>
                 </div>
-                <div class="movie">
-                  <div class="movie-image"> <span class="play"><span class="name">EAGLE EYE</span></span> <a href="#"><img src="css/images/movie10.jpg" alt="" /></a> </div>
-                  <div class="rating">
-                    <p>RATING</p>
-                    <div class="stars">
-                      <div class="stars-in"> </div>
+                <div class="movie shadow bg-lighter-amber pb-4">
+                  <div class="movie-image"> <span class="hidden"><span class="name">X-MAN</span></span> <a href="#"><img src="../assets/img/team-4-470x470.png" alt="" /></a> </div>
+                  <div class="rating flex justify-between p-2">
+                    <div class="flex">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                      <span class="comments">10</span>
                     </div>
-                    <span class="comments">12</span> </div>
+                  </div>
                 </div>
-                <div class="movie">
-                  <div class="movie-image"> <span class="play"><span class="name">NARNIA</span></span> <a href="#"><img src="css/images/movie11.jpg" alt="" /></a> </div>
-                  <div class="rating">
-                    <p>RATING</p>
-                    <div class="stars">
-                      <div class="stars-in"> </div>
+                <div class="movie shadow bg-lighter-amber pb-4">
+                  <div class="movie-image"> <span class="hidden"><span class="name">X-MAN</span></span> <a href="#"><img src="../assets/img/team-4-470x470.png" alt="" /></a> </div>
+                  <div class="rating flex justify-between p-2">
+                    <div class="flex">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                      <span class="comments">10</span>
                     </div>
-                    <span class="comments">12</span> </div>
+                  </div>
                 </div>
-                <div class="movie last">
-                  <div class="movie-image"> <span class="play"><span class="name">ANGELS &amp; DEMONS</span></span> <a href="#"><img src="css/images/movie12.jpg" alt="" /></a> </div>
-                  <div class="rating">
-                    <p>RATING</p>
-                    <div class="stars">
-                      <div class="stars-in"> </div>
+                <div class="movie shadow bg-lighter-amber pb-4">
+                  <div class="movie-image"> <span class="hidden"><span class="name">X-MAN</span></span> <a href="#"><img src="../assets/img/team-4-470x470.png" alt="" /></a> </div>
+                  <div class="rating flex justify-between p-2">
+                    <div class="flex">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                      <span class="comments">10</span>
                     </div>
-                    <span class="comments">12</span> </div>
+                  </div>
                 </div>
-                <div class="cl">&nbsp;</div>
               </div>
-              <div class="box w-full flex">
-                <div class="head">
-                  <h2>MOST COMMENTED</h2>
-                  <p class="text-right"><a href="#">See all</a></p>
-                </div>
-                <div class="movie">
-                  <div class="movie-image"> <span class="play"><span class="name">HOUSE</span></span> <a href="#"><img src="css/images/movie13.jpg" alt="" /></a> </div>
-                  <div class="rating">
-                    <p>RATING</p>
-                    <div class="stars">
-                      <div class="stars-in"> </div>
+            </div>
+            <div id="content" class="w-full mt-4">
+              <div class="h-6 flex justify-between border-b-amber-100 border-b-2 mb-2">
+                <h2 class="text-xs font-anton tracking-widest">LATEST TRAILERS</h2>
+                <p class=""><a href="#">See all</a></p>
+              </div>
+              <div class="box w-full grid grid-cols-5 gap-4">
+                <div class="movie shadow bg-lighter-amber pb-4">
+                  <div class="movie-image"> <span class="hidden"><span class="name">X-MAN</span></span> <a href="#"><img src="../assets/img/team-4-470x470.png" alt="" /></a> </div>
+                  <div class="rating flex justify-between p-2">
+                    <div class="flex">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                      <span class="comments">10</span>
                     </div>
-                    <span class="comments">12</span> </div>
+                  </div>
                 </div>
-                <div class="movie">
-                  <div class="movie-image"> <span class="play"><span class="name">VACANCY</span></span> <a href="#"><img src="css/images/movie14.jpg" alt="" /></a> </div>
-                  <div class="rating">
-                    <p>RATING</p>
-                    <div class="stars">
-                      <div class="stars-in"> </div>
+                <div class="movie shadow bg-lighter-amber pb-4">
+                  <div class="movie-image"> <span class="hidden"><span class="name">X-MAN</span></span> <a href="#"><img src="../assets/img/team-4-470x470.png" alt="" /></a> </div>
+                  <div class="rating flex justify-between p-2">
+                    <div class="flex">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                      <span class="comments">10</span>
                     </div>
-                    <span class="comments">12</span> </div>
+                  </div>
                 </div>
-                <div class="movie">
-                  <div class="movie-image"> <span class="play"><span class="name">MIRRORS</span></span> <a href="#"><img src="css/images/movie15.jpg" alt="" /></a> </div>
-                  <div class="rating">
-                    <p>RATING</p>
-                    <div class="stars">
-                      <div class="stars-in"> </div>
+                <div class="movie shadow bg-lighter-amber pb-4">
+                  <div class="movie-image"> <span class="hidden"><span class="name">X-MAN</span></span> <a href="#"><img src="../assets/img/team-4-470x470.png" alt="" /></a> </div>
+                  <div class="rating flex justify-between p-2">
+                    <div class="flex">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                      <span class="comments">10</span>
                     </div>
-                    <span class="comments">12</span> </div>
+                  </div>
                 </div>
-                <div class="movie">
-                  <div class="movie-image"> <span class="play"><span class="name">THE KINGDOM</span></span> <a href="#"><img src="css/images/movie16.jpg" alt="" /></a> </div>
-                  <div class="rating">
-                    <p>RATING</p>
-                    <div class="stars">
-                      <div class="stars-in"> </div>
+                <div class="movie shadow bg-lighter-amber pb-4">
+                  <div class="movie-image"> <span class="hidden"><span class="name">X-MAN</span></span> <a href="#"><img src="../assets/img/team-4-470x470.png" alt="" /></a> </div>
+                  <div class="rating flex justify-between p-2">
+                    <div class="flex">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                      <span class="comments">10</span>
                     </div>
-                    <span class="comments">12</span> </div>
+                  </div>
                 </div>
-                <div class="movie">
-                  <div class="movie-image"> <span class="play"><span class="name">MOTIVES</span></span> <a href="#"><img src="css/images/movie17.jpg" alt="" /></a> </div>
-                  <div class="rating">
-                    <p>RATING</p>
-                    <div class="stars">
-                      <div class="stars-in"> </div>
+                <div class="movie shadow bg-lighter-amber pb-4">
+                  <div class="movie-image"> <span class="hidden"><span class="name">X-MAN</span></span> <a href="#"><img src="../assets/img/team-4-470x470.png" alt="" /></a> </div>
+                  <div class="rating flex justify-between p-2">
+                    <div class="flex">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                      <span class="comments">10</span>
                     </div>
-                    <span class="comments">12</span> </div>
+                  </div>
                 </div>
-                <div class="movie last">
-                  <div class="movie-image"> <span class="play"><span class="name">THE PRESTIGE</span></span> <a href="#"><img src="css/images/movie18.jpg" alt="" /></a> </div>
-                  <div class="rating">
-                    <p>RATING</p>
-                    <div class="stars">
-                      <div class="stars-in"> </div>
-                    </div>
-                    <span class="comments">12</span> </div>
-                </div>
-                <div class="cl">&nbsp;</div>
               </div>
             </div>
           </div>
