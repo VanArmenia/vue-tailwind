@@ -22,7 +22,6 @@ import { RouterLink, RouterView } from 'vue-router'
       <RouterLink to="/" >HOME</RouterLink>
       <RouterLink to="/">NEWS</RouterLink>
       <RouterLink to="/">IN THEATERS</RouterLink>
-      <RouterLink to="/landing">LANDING</RouterLink>
     </div>
 <!--    </div>-->
   </nav>
