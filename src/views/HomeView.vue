@@ -1,6 +1,3 @@
-<script setup>
-</script>
-
 <template>
   <div>
     <navbar-component></navbar-component>
@@ -58,7 +55,7 @@
         </div>
 
       </div>
-      <section class="artists pt-2 pb-48 bg-dark-amber text-amber-50">
+      <section class="artists pt-2 pb-8 bg-dark-amber text-amber-50">
         <div v-if="error">{{ error }}</div>
         <div v-if="movies.length" class="layout">
           <MovieList :movies="movies" />
@@ -67,6 +64,32 @@
           <Spinner />
         </div>
       </section>
+
+      <section class="pb-2 bg-dark-amber pt-0.5 text-amber-200">
+        <form @submit.prevent="SearchMovies()" class="flex justify-center flex-col p-6">
+          <input type="text" placeholder="What are you looking for?" v-model="search" class="block appearance-none outline-none bg-none w-44 my-0 mx-auto rounded-md mb-2"/>
+          <input type="submit" value="Search" class="cursor-pointer bg-lighter-amber w-44 my-0 mx-auto rounded-md" />
+        </form>
+
+        <div class="sm:grid-cols-2 md:grid-cols-4 grid-cols-1 grid gap-3 mb-10 px-4 overflow-hidden relative">
+          <img :src="fullPath" alt="Movie Poster" />
+        </div>
+
+        <div class="sm:grid-cols-2 md:grid-cols-4 grid-cols-1 grid gap-3 mb-10 px-4 overflow-hidden relative">
+          <div v-for="movie in moviesApi" :key="movie.imdbID" class="">
+            <router-link :to="'/movie/' + movie.imdbID" class="relative group block mr-4 flex-shrink-0">
+              <img :src="movie.Poster" alt="Movie Poster" />
+              <div class="absolute inset-0 bg-black opacity-75 hidden group-hover:flex flex-col justify-end text-white px-4 py-4 cursor-pointer">
+                <div class="w-full">
+                  <h3 class="text-sm mb-2">{{ movie.Title }}</h3>
+                  <p class="year">{{ movie.Year }}</p>
+                </div>
+              </div>
+            </router-link>
+          </div>
+        </div>
+      </section>
+
       <section class="pb-2 bg-dark-amber pt-0.5 text-amber-200">
         <div class="mx-auto px-4">
           <div class="flex flex-wrap mt-4">
@@ -429,6 +452,8 @@
   </div>
 </template>
 <script>
+import {computed, ref} from 'vue';
+import env from '@/env.js'
 import NavbarComponent from "../components/Navbar.vue";
 import FooterComponent from "../components/Footer.vue";
 import getMovies from '../composables/getMovies'
@@ -444,9 +469,36 @@ export default {
   },
   setup() {
     const { movies, error, load } = getMovies()
+    const search = ref("");
+    const moviesTm = ref("");
+    const moviesApi = ref([]);
+    const fullPath = computed(() => {
+      return "https://image.tmdb.org/t/p/w500" +  moviesTm.value.poster_path
+    })
+
+    // fetching movies by search from Omdbapi
+    const SearchMovies = () => {
+      if (search.value !== "") {
+        fetch(`http://www.omdbapi.com/?apikey=${env.omdp_api_key}&s=${search.value}`)
+            .then(response => response.json())
+            .then(data => {
+              moviesApi.value = data.Search;
+              console.log(moviesApi.value)
+              search.value = "";
+            });
+      }
+    }
+
+    // fetching movie by ID from Themoviedb
+    fetch(`https://api.themoviedb.org/3/movie/100?api_key=${env.tmdb_api_key}`)
+        .then(response => response.json())
+        .then(data => {
+          moviesTm.value = data;
+          console.log(moviesTm.value)
+        });
     load()
 
-    return { movies, error }
+    return { movies, error, search, moviesApi, SearchMovies, fullPath }
   },
 }
 </script>

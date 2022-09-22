@@ -17,7 +17,14 @@ module.exports = {
         'dark-amber': '#24201a',
         'lighter-amber': '#302e2a',
       },
-    }
+    },
+    screens: {
+      'sm': '420px',
+      'md': '768px',
+      'lg': '1024px',
+      'xl': '1280px',
+      '2xl': '1536px',
+    },
   },
   plugins: [],
 }

@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
+import { collection, getDocs, doc, getDoc, addDoc  } from 'firebase/firestore';
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -20,4 +20,4 @@ const firebase = initializeApp(firebaseConfig);
 // Initialize Cloud Firestore and get a reference to the service
 
 export const db = getFirestore(firebase);
-export { collection, getDocs, doc, getDoc };
+export { collection, getDocs, doc, getDoc, addDoc };
