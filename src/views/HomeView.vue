@@ -1,12 +1,12 @@
 <template>
   <div>
-    <navbar-component></navbar-component>
     <main>
+      <navbar-component></navbar-component>
+      <div class="absolute top-0 w-full h-full bg-contain bg-hero-pattern">
+        <span id="blackOverlay" class="w-full h-full absolute opacity-30 bg-black"></span>
+      </div>
       <div class="relative pt-16 pb-48 flex content-center items-center justify-center"
            style="min-height: 20vh;">
-        <div class="absolute top-0 w-full h-full bg-contain bg-hero-pattern">
-          <span id="blackOverlay" class="w-full h-full absolute opacity-30 bg-black"></span>
-        </div>
 
         <div class="container relative mx-auto">
           <div class="items-center flex flex-wrap">
@@ -19,23 +19,22 @@
             </div>
           </div>
         </div>
-        <div
-            class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden"
-            style="height: 70px;"
-        >
-        </div>
+        <div class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden" style="height: 70px;"></div>
 
-        <div class="flex absolute bottom-3 right-3 w-full justify-between px-6">
-          <ul class="flex gap-5 text-cyan-600 font-anton tracking-wider bg-dark-amber p-3">
-            <li><a href="#">SHOW ALL</a></li>
-            <li><a href="#">LATEST TRAILERS</a></li>
-            <li><a href="#">TOP RATED</a></li>
-            <li><a href="#">MOST COMMENTED</a></li>
-          </ul>
+        <div class="flex absolute bottom-2 right-3 w-full justify-between px-6">
+<!--          <ul class="flex gap-5 text-cyan-600 font-anton tracking-wider bg-dark-amber p-3">-->
+<!--            <li><a href="#">SHOW ALL</a></li>-->
+<!--            <li><a href="#">LATEST TRAILERS</a></li>-->
+<!--            <li><a href="#">TOP RATED</a></li>-->
+<!--            <li><a href="#">MOST COMMENTED</a></li>-->
+<!--          </ul>-->
+
+          <Slider :genres="genres"/>
+
           <form >
             <div class="flex">
               <label for="search-dropdown" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">Your Email</label>
-              <button id="dropdown-button" data-dropdown-toggle="dropdown" class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-amber-600 border border-amber-600 rounded-l-lg hover:bg-gray-200 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button">All categories <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg></button>
+              <button id="dropdown-button" data-dropdown-toggle="dropdown" class="flex-shrink-0 z-10 inline-flex items-center py-1 px-4 text-sm font-medium text-center text-gray-900 bg-amber-600 border border-amber-600 rounded-l-lg hover:bg-gray-200 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button">All genres <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg></button>
               <div id="dropdown" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700" data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="top" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(897px, 5637px, 0px);">
                 <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
                   <li>
@@ -47,8 +46,7 @@
                 </ul>
               </div>
               <div class="relative w-full">
-                <input type="search" id="search-dropdown" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-dark-amber rounded-r-lg border-l-black border-l-2 border border-gray-900  dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white " placeholder="Search Mockups, Logos, Design Templates..." required>
-                <button type="submit" class="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>
+                <input type="search" id="search-dropdown" class="block p-1 w-full z-20 text-sm text-gray-900 bg-dark-amber rounded-r-lg border-l-black border-l-2 border border-gray-900  dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white " placeholder="Search movies" required>
               </div>
             </div>
           </form>
@@ -56,13 +54,9 @@
 
       </div>
       <section class="artists pt-2 pb-8 bg-dark-amber text-amber-50">
-        <div v-if="error">{{ error }}</div>
-        <div v-if="movies.length" class="layout">
-          <MovieList :movies="movies" />
-        </div>
-        <div v-else>
-          <Spinner />
-        </div>
+
+<!--          <MovieList :movies="movies" />-->
+
       </section>
 
       <section class="pb-2 bg-dark-amber pt-0.5 text-amber-200">
@@ -71,23 +65,27 @@
           <input type="submit" value="Search" class="cursor-pointer bg-lighter-amber w-44 my-0 mx-auto rounded-md" />
         </form>
 
-        <div class="sm:grid-cols-2 md:grid-cols-4 grid-cols-1 grid gap-3 mb-10 px-4 overflow-hidden relative">
-          <img :src="fullPath" alt="Movie Poster" />
-        </div>
+<!--        <div class="sm:grid-cols-2 md:grid-cols-4 grid-cols-1 grid gap-3 mb-10 px-4 overflow-hidden relative">-->
+<!--          <img :src="fullPath" alt="Movie Poster" />-->
+<!--        </div>-->
 
-        <div class="sm:grid-cols-2 md:grid-cols-4 grid-cols-1 grid gap-3 mb-10 px-4 overflow-hidden relative">
-          <div v-for="movie in moviesApi" :key="movie.imdbID" class="">
-            <router-link :to="'/movie/' + movie.imdbID" class="relative group block mr-4 flex-shrink-0">
-              <img :src="movie.Poster" alt="Movie Poster" />
-              <div class="absolute inset-0 bg-black opacity-75 hidden group-hover:flex flex-col justify-end text-white px-4 py-4 cursor-pointer">
-                <div class="w-full">
-                  <h3 class="text-sm mb-2">{{ movie.Title }}</h3>
-                  <p class="year">{{ movie.Year }}</p>
+          <div v-if="error">{{ error }}</div>
+          <div class="sm:grid-cols-4 md:grid-cols-6 grid-cols-1 grid gap-3 mb-10 px-4 overflow-hidden relative" v-if="moviesTm.length">
+            <div  v-for="movie in moviesTm" :key="movie.id" class="">
+              <router-link :to="'/movie/' + movie.id" class="relative group block mr-4 flex-shrink-0">
+                <img :src="fullPath + movie.poster_path" alt="Movie Poster" />
+                <div class="absolute inset-0 bg-black opacity-75 hidden group-hover:flex flex-col justify-end text-white px-4 py-4 cursor-pointer">
+                  <div class="w-full">
+                    <h3 class="text-sm mb-2">{{ movie.title }}</h3>
+                    <p class="year">{{ movie.release_date }}</p>
+                  </div>
                 </div>
-              </div>
-            </router-link>
+              </router-link>
+            </div>
           </div>
-        </div>
+          <div v-else>
+            <Spinner />
+          </div>
       </section>
 
       <section class="pb-2 bg-dark-amber pt-0.5 text-amber-200">
@@ -452,7 +450,7 @@
   </div>
 </template>
 <script>
-import {computed, ref} from 'vue';
+import { ref} from 'vue';
 import env from '@/env.js'
 import NavbarComponent from "../components/Navbar.vue";
 import FooterComponent from "../components/Footer.vue";
@@ -460,21 +458,22 @@ import getMovies from '../composables/getMovies'
 // component imports
 import MovieList from '../components/MovieList.vue'
 import Spinner from '../components/Spinner.vue'
+import Slider from '@/components/extras/Slider.vue'
 
 
 export default {
   name: "landing-page",
   components: {
-    NavbarComponent, FooterComponent, MovieList, Spinner
+     NavbarComponent, FooterComponent, MovieList, Spinner, Slider
   },
   setup() {
-    const { movies, error, load } = getMovies()
+    const { movies, load } = getMovies()
+    const error = ref("");
     const search = ref("");
     const moviesTm = ref("");
     const moviesApi = ref([]);
-    const fullPath = computed(() => {
-      return "https://image.tmdb.org/t/p/w500" +  moviesTm.value.poster_path
-    })
+    const genres = ref([]);
+    const fullPath = "https://image.tmdb.org/t/p/w500"
 
     // fetching movies by search from Omdbapi
     const SearchMovies = () => {
@@ -483,22 +482,38 @@ export default {
             .then(response => response.json())
             .then(data => {
               moviesApi.value = data.Search;
-              console.log(moviesApi.value)
               search.value = "";
             });
       }
     }
 
-    // fetching movie by ID from Themoviedb
-    fetch(`https://api.themoviedb.org/3/movie/100?api_key=${env.tmdb_api_key}`)
+    // fetching movie genres from Themoviedb
+    fetch(` https://api.themoviedb.org/3/genre/movie/list?api_key=${env.tmdb_api_key}&language=en-US`)
         .then(response => response.json())
         .then(data => {
-          moviesTm.value = data;
-          console.log(moviesTm.value)
+          genres.value = data.genres;
+          console.log(genres.value)
         });
+
+    // fetching movies by genres from Themoviedb
+
+      fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${env.tmdb_api_key}&language=us-US&sort_by=popularity.desc&include_adult=false&with_genres=28`)
+        .then((res)=>{
+            if(res.ok) return res.json();
+            else throw new Error("Status code error :" + res.status)
+          })
+        .then(data => {
+          moviesTm.value = data.results;
+          moviesTm.value = moviesTm.value.filter(movie => movie.original_language === 'en');
+          console.log(moviesTm.value)
+        }).catch(err => {
+        error.value = "Something went wrong"
+        console.log(err.message);
+      });
+
     load()
 
-    return { movies, error, search, moviesApi, SearchMovies, fullPath }
+    return { movies, error, search, moviesTm, SearchMovies, fullPath, genres }
   },
 }
 </script>

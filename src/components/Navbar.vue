@@ -1,31 +1,34 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-</script>
 <template>
-  <nav class="top-0 absolute z-50 w-full flex flex-wrap items-center justify-between px-2 py-3">
-    <div class="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start" >
-      <h1 class="logo w-64 h-16 text-2xl font-fascinate">
-        <RouterLink to="/"><span class="text-cyan-600">Art</span><span class="text-cyan-600">House</span> <span class="text-amber-600">Movies</span></RouterLink>
-      </h1>
-
-      <button class="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
-        type="button"
-        v-on:click="toggleNavbar()"
-      >
-        <i class="text-white fas fa-bars"></i>
-      </button>
-    </div>
-<!--    <div class="lg:flex flex-grow items-center bg-white lg:bg-transparent lg:shadow-none"-->
-<!--      v-bind:class="{'hidden': !showMenu, 'block': showMenu}">-->
-
-    <div class="font-anton h-16 text-amber-600 tracking-wider">
-      <RouterLink to="/" >HOME</RouterLink>
-      <RouterLink to="/">NEWS</RouterLink>
-      <RouterLink to="/">IN THEATERS</RouterLink>
-    </div>
-<!--    </div>-->
+  <nav class="md:p-3 py-2 px-3 z-10">
+    <div class="container mx-auto md:flex block flex-wrap items-center justify-start">
+        <h1 class="logo w-64 h-16 text-2xl font-fascinate">
+          <RouterLink to="/"><span class="text-cyan-600">Art</span><span class="text-cyan-600">House</span> <span class="text-amber-600">Movies</span></RouterLink>
+        </h1>
+      </div>
+      <div class="md:flex flex-grow items-center bg-white lg:bg-transparent lg:shadow-none"
+           v-bind:class="{'hidden': !showMenu, 'md:flex': showMenu}">
+      </div>
+      <ul data-menu class="font-anton h-16 text-amber-600 tracking-wider md:flex hidden flex-wrap items-center justify-start text-white">
+        <li class="md:px-6 py-2">
+          <RouterLink to="/" >HOME</RouterLink>
+        </li>
+        <li class="md:px-6 py-2">
+          <a href="#">Stream/Buy</a>
+        </li>
+        <li class="md:px-6 py-2">
+          <a href="#">Coming Soon</a>
+        </li>
+        <li class="md:px-6 py-2">
+          <RouterLink to="/">IN THEATERS</RouterLink>
+        </li>
+        <li class="md:px-6 py-2">
+          <a href="#">About Us</a>
+        </li>
+        <li class="md:px-6 py-2">
+          <a href="#">Contact</a>
+        </li>
+      </ul>
   </nav>
-  <RouterView />
 </template>
 <script>
 export default {
