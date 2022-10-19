@@ -24,6 +24,7 @@
         </li>
       </ul>
 
+     <!-- Search form-->
       <form @submit.prevent="$emit('searchEvent', search)" class="ml-4">
         <div class="flex mx-auto">
           <label for="search-dropdown" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">Your Email</label>

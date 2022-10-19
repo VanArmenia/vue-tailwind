@@ -4,13 +4,7 @@
       <section class="w-full h-full bg-cover bg-hero-pattern">
         <span id="blackOverlay" class="w-full h-full absolute opacity-50 bg-black"></span>
         <Navbar @searchEvent="SearchMovies"></Navbar>
-        <div class="flex content-center items-center justify-center">
-          <div class="w-full lg:w-6/12 px-4 text-center">
-            <h1 class="text-white font-semibold text-4xl">
-              Your hub for arthouse movies
-            </h1>
-          </div>
-        </div>
+
         <div class="bottom-2 px-4 w-full justify-between px-2">
           <!--          <Slider :genres="genres"/>-->
 
@@ -18,25 +12,43 @@
         </div>
 
         <div class="pb-2 pt-0.5 text-amber-200 flex px-8 mt-8">
-          <div v-if="error">{{ error }}</div>
-          <div class="sm:grid-cols-4 md:grid-cols-5 grid-cols-1 grid gap-3 mb-10 px-4 overflow-hidden relative w-5/6" v-if="moviesTm.length">
-            <div  v-for="movie in moviesTm" :key="movie.id" class="">
-              <router-link :to="'/movie/' + movie.id" class="relative group block mr-4 flex-shrink-0">
-                <img :src="fullPath + movie.poster_path" alt="Movie Poster" />
-                <div class="absolute inset-0 bg-black opacity-75 hidden group-hover:flex flex-col justify-end text-white px-4 py-4 cursor-pointer">
-                  <div class="w-full">
-                    <h3 class="text-sm mb-2">{{ movie.title }}</h3>
-                    <p class="year">{{ movie.release_date }}</p>
+          <div class="w-5/6">
+            <div v-if="error">{{ error }}</div>
+            <div class="my-6">
+              <div class="w-full px-4 text-center flex justify-between">
+                <h1 class="text-white font-semibold text-3xl uppercase font-light text-left">
+                  <span class="font-bold"> arthouse </span> movies hub
+                </h1>
+                <div class="flex pt-2 mx-2">
+                  <div class="w-10 -scale-x-100 border border-gray-700 rounded-md hover:bg-lighter-amber p-2 mx-1 cursor-pointer">
+                    <svg class="fill-amber-100 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.92,11.62a1,1,0,0,0-.21-.33l-5-5a1,1,0,0,0-1.42,1.42L14.59,11H7a1,1,0,0,0,0,2h7.59l-3.3,3.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l5-5a1,1,0,0,0,.21-.33A1,1,0,0,0,17.92,11.62Z"/></svg>
+                  </div>
+                  <div class="w-10 border border-gray-700 rounded-md hover:bg-lighter-amber p-2 mx-1 cursor-pointer">
+                    <svg class="fill-amber-100 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.92,11.62a1,1,0,0,0-.21-.33l-5-5a1,1,0,0,0-1.42,1.42L14.59,11H7a1,1,0,0,0,0,2h7.59l-3.3,3.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l5-5a1,1,0,0,0,.21-.33A1,1,0,0,0,17.92,11.62Z"/></svg>
                   </div>
                 </div>
-              </router-link>
+              </div>
+            </div>
+            <div class="sm:grid-cols-4 md:grid-cols-5 grid-cols-1 grid gap-3 mb-10 px-4 overflow-hidden relative" v-if="moviesTm.length">
+              <div  v-for="movie in moviesTm" :key="movie.id" class="">
+                <router-link :to="'/movie/' + movie.id" class="relative group block mr-4 flex-shrink-0">
+                  <img :src="fullPath + movie.poster_path" alt="Movie Poster" />
+                  <div class="absolute inset-0 bg-black opacity-75 hidden group-hover:flex flex-col justify-end text-white px-4 py-4 cursor-pointer">
+                    <div class="w-full">
+                      <h3 class="text-sm mb-2">{{ movie.title }}</h3>
+                      <p class="year">{{ movie.release_date }}</p>
+                    </div>
+                  </div>
+                </router-link>
+              </div>
+            </div>
+            <div v-else>
+              <Spinner />
             </div>
           </div>
-          <div v-else>
-            <Spinner />
-          </div>
-          <div class="w-1/6">
-            <GenresBlock :genres="genres"/>
+
+          <div class="w-1/6 mt-8">
+            <GenresBlock :genres="genres" @filterByGenre="filterByGenre"/>
           </div>
         </div>
       </section>
@@ -426,7 +438,7 @@ import GenresBlock from '@/components/extras/Genres.vue'
 export default {
   name: "landing-page",
   components: {
-     Navbar, FooterComponent, MovieList, Spinner, Slider, GenresBlock
+     Navbar, FooterComponent, Spinner, GenresBlock
   },
   setup() {
     const { movies, load } = getMovies()
@@ -447,6 +459,30 @@ export default {
       }
     }
 
+    // filtering movies by specific genre
+    const filterByGenre = (specGenre) => {
+      console.log(specGenre)
+      let url = ''
+      if (specGenre.id == 0) {
+         url = `https://api.themoviedb.org/3/discover/movie?api_key=${env.tmdb_api_key}&language=us-US&sort_by=popularity.desc&include_adult=false`
+      } else {
+         url = `https://api.themoviedb.org/3/discover/movie?api_key=${env.tmdb_api_key}&language=us-US&sort_by=popularity.desc&include_adult=false&with_genres=${specGenre.id}`
+      }
+      fetch(url)
+          .then((res)=>{
+            if(res.ok) return res.json();
+            else throw new Error("Status code error :" + res.status)
+          })
+          .then(data => {
+            moviesTm.value = data.results;
+            moviesTm.value = moviesTm.value.filter(movie => movie.original_language === 'en');
+            console.log(moviesTm.value)
+          }).catch(err => {
+        error.value = "Something went wrong"
+        console.log(err.message);
+      });
+    }
+
     // fetching movie genres from Themoviedb
     fetch(` https://api.themoviedb.org/3/genre/movie/list?api_key=${env.tmdb_api_key}&language=en-US`)
         .then(response => response.json())
@@ -456,9 +492,8 @@ export default {
           console.log(genres.value)
         });
 
-    // fetching movies by genres from Themoviedb
-
-      fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${env.tmdb_api_key}&language=us-US&sort_by=popularity.desc&include_adult=false&with_genres=18`)
+    // fetching starting movies from Themoviedb
+      fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${env.tmdb_api_key}&language=us-US&sort_by=vote_average.desc&include_adult=false`)
         .then((res)=>{
             if(res.ok) return res.json();
             else throw new Error("Status code error :" + res.status)
@@ -474,7 +509,7 @@ export default {
 
     load()
 
-    return { movies, error, moviesTm, SearchMovies, fullPath, genres, GenresBlock }
+    return { movies, error, moviesTm, SearchMovies, fullPath, genres, GenresBlock, filterByGenre }
   },
 }
 </script>
