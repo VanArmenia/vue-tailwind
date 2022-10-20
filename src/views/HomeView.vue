@@ -20,10 +20,10 @@
                   <span class="font-bold"> arthouse </span> movies hub
                 </h1>
                 <div class="flex pt-2 mx-2">
-                  <div class="w-10 -scale-x-100 border border-gray-700 rounded-md hover:bg-lighter-amber p-2 mx-1 cursor-pointer">
+                  <div @click="page--" :class="page === 1 ? 'noMouse' : ''" class="w-10 -scale-x-100 border border-gray-700 rounded-md hover:bg-lighter-amber p-2 mx-1 cursor-pointer">
                     <svg class="fill-amber-100 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.92,11.62a1,1,0,0,0-.21-.33l-5-5a1,1,0,0,0-1.42,1.42L14.59,11H7a1,1,0,0,0,0,2h7.59l-3.3,3.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l5-5a1,1,0,0,0,.21-.33A1,1,0,0,0,17.92,11.62Z"/></svg>
                   </div>
-                  <div class="w-10 border border-gray-700 rounded-md hover:bg-lighter-amber p-2 mx-1 cursor-pointer">
+                  <div @click="page++" class="w-10 border border-gray-700 rounded-md hover:bg-lighter-amber p-2 mx-1 cursor-pointer">
                     <svg class="fill-amber-100 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.92,11.62a1,1,0,0,0-.21-.33l-5-5a1,1,0,0,0-1.42,1.42L14.59,11H7a1,1,0,0,0,0,2h7.59l-3.3,3.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l5-5a1,1,0,0,0,.21-.33A1,1,0,0,0,17.92,11.62Z"/></svg>
                   </div>
                 </div>
@@ -423,7 +423,7 @@
   </div>
 </template>
 <script>
-import { ref} from 'vue';
+import {ref, watch, watchEffect} from 'vue';
 import env from '@/env.js'
 import Navbar from "../components/Navbar.vue";
 import FooterComponent from "../components/Footer.vue";
@@ -445,7 +445,13 @@ export default {
     const error = ref("");
     const moviesTm = ref("");
     const genres = ref([]);
+    const specGenreAssigned = ref({});
     const fullPath = "https://image.tmdb.org/t/p/w500"
+    const page = ref(1)
+    console.log(specGenreAssigned.value)
+    watch(page, () => {
+      filterByGenre(specGenreAssigned.value)
+    })
 
     // fetching movies by search
     const SearchMovies = (search) => {
@@ -453,22 +459,27 @@ export default {
         fetch(`https://api.themoviedb.org/3/search/movie?api_key=${env.tmdb_api_key}&language=en-US&page=1&include_adult=false&query=${search}`)
             .then(response => response.json())
             .then(data => {
-              console.log(data.results)
               moviesTm.value = data.results;
             });
       }
     }
 
     // filtering movies by specific genre
-    const filterByGenre = (specGenre) => {
-      console.log(specGenre)
+    const filterByGenre = (specGenre = {id:0, name:'All'}, clickFromGenre) =>  {
+      if (clickFromGenre === 1) {
+        page.value = 1
+      }
+      console.log('clicked is ' + clickFromGenre)
+      console.log('page number = ' + page.value)
+      specGenreAssigned.value = specGenre
+      console.log( specGenreAssigned.value)
       let url = ''
       if (specGenre.id == 0) {
-         url = `https://api.themoviedb.org/3/discover/movie?api_key=${env.tmdb_api_key}&language=us-US&sort_by=popularity.desc&include_adult=false`
+         url = `https://api.themoviedb.org/3/discover/movie?api_key=${env.tmdb_api_key}&language=us-US&sort_by=popularity.desc&include_adult=false&page=${page.value}`
       } else {
-         url = `https://api.themoviedb.org/3/discover/movie?api_key=${env.tmdb_api_key}&language=us-US&sort_by=popularity.desc&include_adult=false&with_genres=${specGenre.id}`
+         url = `https://api.themoviedb.org/3/discover/movie?api_key=${env.tmdb_api_key}&language=us-US&sort_by=popularity.desc&include_adult=false&page=${page.value}&with_genres=${specGenre.id}`
       }
-      fetch(url)
+       fetch(url)
           .then((res)=>{
             if(res.ok) return res.json();
             else throw new Error("Status code error :" + res.status)
@@ -489,27 +500,16 @@ export default {
         .then(data => {
           data.genres.unshift({id:0, name:'All'});
           genres.value = data.genres;
-          console.log(genres.value)
         });
 
-    // fetching starting movies from Themoviedb
-      fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${env.tmdb_api_key}&language=us-US&sort_by=vote_average.desc&include_adult=false`)
-        .then((res)=>{
-            if(res.ok) return res.json();
-            else throw new Error("Status code error :" + res.status)
-          })
-        .then(data => {
-          moviesTm.value = data.results;
-          moviesTm.value = moviesTm.value.filter(movie => movie.original_language === 'en');
-          console.log(moviesTm.value)
-        }).catch(err => {
-        error.value = "Something went wrong"
-        console.log(err.message);
-      });
+    filterByGenre()
 
-    load()
-
-    return { movies, error, moviesTm, SearchMovies, fullPath, genres, GenresBlock, filterByGenre }
+    return { movies, error, moviesTm, SearchMovies, fullPath, genres, GenresBlock, filterByGenre, page }
   },
 }
 </script>
+<style>
+ .noMouse {
+   pointer-events: none;
+ }
+</style>
