@@ -16,14 +16,18 @@
             <div v-if="error">{{ error }}</div>
             <div class="my-6">
               <div class="w-full px-4 text-center flex justify-between">
-                <h1 class="text-white font-semibold text-3xl uppercase font-light text-left">
-                  <span class="font-bold"> arthouse </span> movies hub
-                </h1>
-                <div class="flex pt-2 mx-2">
-                  <div @click="page--" :class="page === 1 ? 'noMouse' : ''" class="w-10 -scale-x-100 border border-gray-700 rounded-md hover:bg-lighter-amber p-2 mx-1 cursor-pointer">
+                <div>
+                  <h1 class="text-white text-3xl uppercase font-light text-left">
+                    <span class="font-bold"> arthouse </span> movies hub
+                  </h1>
+                  <p v-if="searchQuery" class="text-white mt-4 text-left italic">Search results for <span class="font-bold">{{searchQuery}}</span></p>
+                  <p v-if="specGenreAssigned && specGenreAssigned.name !== 'All'" class="text-white mt-4 text-left italic">results for genre <span class="font-bold">{{specGenreAssigned.name}}</span></p>
+                </div>
+                <div class="flex pt-2 mx-2 h-12">
+                  <div @click="MoviesPrevPage" :class="page === 1 ? 'noMouse' : ''" class="w-10 -scale-x-100 border border-gray-700 rounded-md hover:bg-lighter-amber p-2 mx-1 cursor-pointer">
                     <svg class="fill-amber-100 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.92,11.62a1,1,0,0,0-.21-.33l-5-5a1,1,0,0,0-1.42,1.42L14.59,11H7a1,1,0,0,0,0,2h7.59l-3.3,3.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l5-5a1,1,0,0,0,.21-.33A1,1,0,0,0,17.92,11.62Z"/></svg>
                   </div>
-                  <div @click="page++" class="w-10 border border-gray-700 rounded-md hover:bg-lighter-amber p-2 mx-1 cursor-pointer">
+                  <div @click="MoviesNextPage" class="w-10 border border-gray-700 rounded-md hover:bg-lighter-amber p-2 mx-1 cursor-pointer">
                     <svg class="fill-amber-100 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.92,11.62a1,1,0,0,0-.21-.33l-5-5a1,1,0,0,0-1.42,1.42L14.59,11H7a1,1,0,0,0,0,2h7.59l-3.3,3.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l5-5a1,1,0,0,0,.21-.33A1,1,0,0,0,17.92,11.62Z"/></svg>
                   </div>
                 </div>
@@ -444,19 +448,43 @@ export default {
     const { movies, load } = getMovies()
     const error = ref("");
     const moviesTm = ref("");
+    const searchQuery = ref("");
+    const searchTriggered = ref(false);
     const genres = ref([]);
     const specGenreAssigned = ref({});
     const fullPath = "https://image.tmdb.org/t/p/w500"
     const page = ref(1)
+
+    const MoviesNextPage = () => {
+      page.value ++
+      if (searchTriggered.value) {
+        SearchMovies(searchQuery.value)
+      } else {
+        filterByGenre(specGenreAssigned.value)
+      }
+    }
+
+    const MoviesPrevPage = () => {
+      page.value --
+      if (searchTriggered.value) {
+        SearchMovies(searchQuery.value)
+      } else {
+        filterByGenre(specGenreAssigned.value)
+      }
+    }
+
     console.log(specGenreAssigned.value)
-    watch(page, () => {
-      filterByGenre(specGenreAssigned.value)
-    })
 
     // fetching movies by search
-    const SearchMovies = (search) => {
+    const SearchMovies = (search, clickFromSearch) => {
+      specGenreAssigned.value = ''
+      if (clickFromSearch) {
+        page.value = 1
+      }
+      searchTriggered.value = true
+      searchQuery.value = search
       if (search !== "") {
-        fetch(`https://api.themoviedb.org/3/search/movie?api_key=${env.tmdb_api_key}&language=en-US&page=1&include_adult=false&query=${search}`)
+        fetch(`https://api.themoviedb.org/3/search/movie?api_key=${env.tmdb_api_key}&language=en-US&page=${page.value}&include_adult=false&query=${search}`)
             .then(response => response.json())
             .then(data => {
               moviesTm.value = data.results;
@@ -466,6 +494,8 @@ export default {
 
     // filtering movies by specific genre
     const filterByGenre = (specGenre = {id:0, name:'All'}, clickFromGenre) =>  {
+      searchQuery.value = ''
+      searchTriggered.value = false
       if (clickFromGenre === 1) {
         page.value = 1
       }
@@ -504,7 +534,7 @@ export default {
 
     filterByGenre()
 
-    return { movies, error, moviesTm, SearchMovies, fullPath, genres, GenresBlock, filterByGenre, page }
+    return { movies, error, moviesTm, SearchMovies, fullPath, genres, GenresBlock, filterByGenre, page, searchTriggered, MoviesNextPage, MoviesPrevPage, searchQuery, specGenreAssigned }
   },
 }
 </script>
