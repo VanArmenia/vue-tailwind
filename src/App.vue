@@ -1,36 +1,36 @@
-<script setup>
+<script>
 import { RouterView } from 'vue-router'
+import env from '@/env.js'
+import Navbar  from "@/components/Navbar.vue"
+import FooterComponent  from "@/components/Footer.vue"
+
+export default {
+  components: {
+    Navbar, FooterComponent
+  },
+  setup() {
+    return {RouterView,env,Navbar,FooterComponent }
+  }
+}
+
 </script>
 
 <template>
-
-  <RouterView />
+  <Navbar />
+  <RouterView :env = 'env'/>
+  <FooterComponent />
 </template>
 
 <style>
 @import '@/assets/base.css';
 
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-}
 
 @media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
 }
 
 
 nav a.router-link-exact-active {
-  color: #ad9b90;
+  color: #f89118;
 }
 
 nav a.router-link-exact-active:hover {
@@ -48,12 +48,6 @@ nav a:first-of-type {
 }
 
 @media (min-width: 1024px) {
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
   .logo {
     margin: 0 2rem 0 0;
   }

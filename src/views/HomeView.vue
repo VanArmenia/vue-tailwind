@@ -1,17 +1,12 @@
 <template>
-  <div>
     <main>
       <section class="w-full h-full bg-cover bg-hero-pattern">
-        <span id="blackOverlay" class="w-full h-full absolute opacity-50 bg-black"></span>
-        <Navbar @searchEvent="SearchMovies"></Navbar>
-
+        <span class="w-full h-full absolute opacity-30 bg-black"></span>
         <div class="bottom-2 px-4 w-full justify-between px-2">
           <!--          <Slider :genres="genres"/>-->
 
-
         </div>
-
-        <div class="pb-2 pt-0.5 text-amber-200 flex px-8 mt-8">
+        <div class="pb-2 pt-0.5 text-amber-200 flex px-8">
           <div class="w-5/6">
             <div v-if="error">{{ error }}</div>
             <div class="my-6">
@@ -24,19 +19,19 @@
                   <p v-if="specGenreAssigned && specGenreAssigned.name !== 'All'" class="text-white mt-4 text-left italic">results for genre <span class="font-bold">{{specGenreAssigned.name}}</span></p>
                 </div>
                 <div class="flex pt-2 mx-2 h-12">
-                  <div @click="MoviesPrevPage" :class="page === 1 ? 'noMouse' : ''" class="w-10 -scale-x-100 border border-gray-700 rounded-md hover:bg-lighter-amber p-2 mx-1 cursor-pointer">
-                    <svg class="fill-amber-100 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.92,11.62a1,1,0,0,0-.21-.33l-5-5a1,1,0,0,0-1.42,1.42L14.59,11H7a1,1,0,0,0,0,2h7.59l-3.3,3.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l5-5a1,1,0,0,0,.21-.33A1,1,0,0,0,17.92,11.62Z"/></svg>
+                  <div @click="MoviesPrevPage" :class="page === 1 ? 'noMouse' : ''" class="w-10 -scale-x-100 border border-amber-500 rounded-md hover:border-amber-100 p-2 mx-1 cursor-pointer transition-all duration-300">
+                    <svg class="fill-amber-600 w-6 transition-all duration-500 hover:fill-amber-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.92,11.62a1,1,0,0,0-.21-.33l-5-5a1,1,0,0,0-1.42,1.42L14.59,11H7a1,1,0,0,0,0,2h7.59l-3.3,3.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l5-5a1,1,0,0,0,.21-.33A1,1,0,0,0,17.92,11.62Z"/></svg>
                   </div>
-                  <div @click="MoviesNextPage" class="w-10 border border-gray-700 rounded-md hover:bg-lighter-amber p-2 mx-1 cursor-pointer">
-                    <svg class="fill-amber-100 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.92,11.62a1,1,0,0,0-.21-.33l-5-5a1,1,0,0,0-1.42,1.42L14.59,11H7a1,1,0,0,0,0,2h7.59l-3.3,3.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l5-5a1,1,0,0,0,.21-.33A1,1,0,0,0,17.92,11.62Z"/></svg>
+                  <div @click="MoviesNextPage" class="w-10 border border-amber-500 rounded-md hover:border-amber-100 p-2 mx-1 cursor-pointer duration-500">
+                    <svg class="fill-amber-600 w-6 duration-300 hover:fill-amber-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.92,11.62a1,1,0,0,0-.21-.33l-5-5a1,1,0,0,0-1.42,1.42L14.59,11H7a1,1,0,0,0,0,2h7.59l-3.3,3.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l5-5a1,1,0,0,0,.21-.33A1,1,0,0,0,17.92,11.62Z"/></svg>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="sm:grid-cols-4 md:grid-cols-5 grid-cols-1 grid gap-3 mb-10 px-4 overflow-hidden relative" v-if="moviesTm.length">
+            <div class="sm:grid-cols-4 md:grid-cols-5 grid-cols-1 grid gap-3 mb-10 px-4 overflow-hidden relative " v-if="moviesTm.length">
               <div  v-for="movie in moviesTm" :key="movie.id" class="">
                 <router-link :to="'/movie/' + movie.id" class="relative group block mr-4 flex-shrink-0">
-                  <img :src="fullPath + movie.poster_path" alt="Movie Poster" />
+                  <img :src="fullPath + movie.poster_path" alt="Movie Poster" class="poster"/>
                   <div class="absolute inset-0 bg-black opacity-75 hidden group-hover:flex flex-col justify-end text-white px-4 py-4 cursor-pointer">
                     <div class="w-full">
                       <h3 class="text-sm mb-2">{{ movie.title }}</h3>
@@ -52,18 +47,12 @@
           </div>
 
           <div class="w-1/6 mt-8">
+            <Search @searchEvent="SearchMovies"></Search>
             <GenresBlock :genres="genres" @filterByGenre="filterByGenre"/>
           </div>
         </div>
       </section>
-
-      <section class="artists pt-2 pb-8 bg-dark-amber text-amber-50">
-
-<!--          <MovieList :movies="movies" />-->
-
-      </section>
-
-
+      <Upcoming :env = 'env' :fullPath = 'fullPath'/>
 
       <section class="pb-2 bg-dark-amber pt-0.5 text-amber-200">
         <div class="mx-auto px-4">
@@ -423,28 +412,27 @@
       </section>
 
     </main>
-    <footer-component></footer-component>
-  </div>
 </template>
 <script>
-import {ref, watch, watchEffect} from 'vue';
-import env from '@/env.js'
-import Navbar from "../components/Navbar.vue";
-import FooterComponent from "../components/Footer.vue";
+import {ref} from 'vue';
+import Search from "../components/Search.vue";
 import getMovies from '../composables/getMovies'
+
 // component imports
-import MovieList from '../components/MovieList.vue'
 import Spinner from '../components/Spinner.vue'
-import Slider from '@/components/extras/Slider.vue'
 import GenresBlock from '@/components/extras/Genres.vue'
+import Upcoming from '@/components/extras/Upcoming.vue'
 
 
 export default {
   name: "landing-page",
   components: {
-     Navbar, FooterComponent, Spinner, GenresBlock
+    Spinner, GenresBlock, Search, Upcoming
   },
-  setup() {
+  props: {
+    env: Object,
+  },
+  setup(props) {
     const { movies, load } = getMovies()
     const error = ref("");
     const moviesTm = ref("");
@@ -484,7 +472,7 @@ export default {
       searchTriggered.value = true
       searchQuery.value = search
       if (search !== "") {
-        fetch(`https://api.themoviedb.org/3/search/movie?api_key=${env.tmdb_api_key}&language=en-US&page=${page.value}&include_adult=false&query=${search}`)
+        fetch(`https://api.themoviedb.org/3/search/movie?api_key=${props.env.tmdb_api_key}&language=en-US&page=${page.value}&include_adult=false&query=${search}`)
             .then(response => response.json())
             .then(data => {
               moviesTm.value = data.results;
@@ -505,9 +493,9 @@ export default {
       console.log( specGenreAssigned.value)
       let url = ''
       if (specGenre.id == 0) {
-         url = `https://api.themoviedb.org/3/discover/movie?api_key=${env.tmdb_api_key}&language=us-US&sort_by=popularity.desc&include_adult=false&page=${page.value}`
+         url = `https://api.themoviedb.org/3/discover/movie?api_key=${props.env.tmdb_api_key}&language=us-US&sort_by=popularity.desc&include_adult=false&page=${page.value}`
       } else {
-         url = `https://api.themoviedb.org/3/discover/movie?api_key=${env.tmdb_api_key}&language=us-US&sort_by=popularity.desc&include_adult=false&page=${page.value}&with_genres=${specGenre.id}`
+         url = `https://api.themoviedb.org/3/discover/movie?api_key=${props.env.tmdb_api_key}&language=us-US&sort_by=popularity.desc&include_adult=false&page=${page.value}&with_genres=${specGenre.id}`
       }
        fetch(url)
           .then((res)=>{
@@ -525,7 +513,7 @@ export default {
     }
 
     // fetching movie genres from Themoviedb
-    fetch(` https://api.themoviedb.org/3/genre/movie/list?api_key=${env.tmdb_api_key}&language=en-US`)
+    fetch(` https://api.themoviedb.org/3/genre/movie/list?api_key=${props.env.tmdb_api_key}&language=en-US`)
         .then(response => response.json())
         .then(data => {
           data.genres.unshift({id:0, name:'All'});
@@ -541,5 +529,17 @@ export default {
 <style>
  .noMouse {
    pointer-events: none;
+ }
+ .poster {
+   animation: fadein 2s;
+ }
+
+ @keyframes fadein {
+   0% {
+     opacity: .1;
+   }
+   100% {
+     opacity: 1;
+   }
  }
 </style>

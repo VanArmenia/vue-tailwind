@@ -1,7 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import Details from '../views/Details.vue'
-import Create from '../views/Create.vue'
+import About from '../views/About.vue'
+import InTheatres from '../views/InTheatres.vue'
+import Stream from '../views/Stream.vue'
 
 
 const router = createRouter({
@@ -19,10 +21,20 @@ const router = createRouter({
       props: true
     },
     {
-      path: '/create',
-      name: 'Create',
-      component: Create
+      path: '/about',
+      name: 'About',
+      component: About
     },
+    {
+      path: '/theatres',
+      name: 'In Theatres',
+      component: InTheatres
+    },
+    {
+      path: '/stream',
+      name: 'Stream',
+      component: Stream
+    }
   ]
 })
 
