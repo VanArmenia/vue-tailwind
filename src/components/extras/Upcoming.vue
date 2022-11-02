@@ -1,5 +1,5 @@
 <template>
-  <section class="artists pt-2 pb-8 bg-dark-amber text-amber-50 px-8">
+  <section class="artists pt-2 pb-8 bg-dark-amber text-amber-50 px-12">
     <movie-list :movies = 'moviesUp' :error = 'error' :page = 'page'>
       <template v-slot:pager>
        <div class="m-4">

@@ -8,8 +8,7 @@
         </div>
 
         <div class="pb-2 pt-0.5 text-amber-200 flex px-8">
-          <div class="w-5/6">
-
+          <div class="w-5/6 mr-4">
             <div v-if="error">{{ error }}</div>
             <div class="my-6">
               <div class="w-full px-4 text-center flex justify-between">
@@ -32,10 +31,10 @@
 
             <movie-list v-if="moviesGen.length" :movies = 'moviesGen' :error = 'error'>
               <template v-slot:results>
-
-                  <p v-if="searchQuery" class="text-white mt-4 text-left italic">Search results for <span class="font-bold">{{searchQuery}}</span></p>
-                  <p v-if="specGenreAssigned && specGenreAssigned.name !== 'All'" class="text-white mt-4 text-left italic">results for genre <span class="font-bold">{{specGenreAssigned.name}}</span></p>
-
+                <div class="h-8 text-amber-200">
+                  <p v-if="searchQuery" class="text-white text-left italic ml-4">Search results for <span class="font-bold">{{searchQuery}}</span></p>
+                  <p v-if="specGenreAssigned && specGenreAssigned.name !== 'All'" class="text-white text-left italic ml-4">results for genre <span class="font-bold">{{specGenreAssigned.name}}</span></p>
+                </div>
               </template>
             </movie-list>
             <div v-else>
@@ -55,69 +54,6 @@
         <div class="mx-auto px-4">
           <div class="flex flex-wrap mt-4">
             <div id="content" class="w-full">
-              <div class="h-6 flex justify-between border-b-amber-100 border-b-2 mb-2">
-                <h2 class="text-xs font-anton tracking-widest">LATEST TRAILERS</h2>
-                <p class=""><a href="#">See all</a></p>
-              </div>
-              <div class="box w-full grid grid-cols-5 gap-4">
-                <div class="movie shadow bg-lighter-amber pb-4">
-                  <div class="movie-image"> <span class="hidden"><span class="name">X-MAN</span></span> <a href="#"><img src="../assets/img/team-4-470x470.png" alt="" /></a> </div>
-                  <div class="rating flex justify-between p-2">
-                    <div class="flex">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </svg>
-                      <span class="comments">10</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="movie shadow bg-lighter-amber pb-4">
-                  <div class="movie-image"> <span class="hidden"><span class="name">X-MAN</span></span> <a href="#"><img src="../assets/img/team-4-470x470.png" alt="" /></a> </div>
-                  <div class="rating flex justify-between p-2">
-                    <div class="flex">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </svg>
-                      <span class="comments">10</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="movie shadow bg-lighter-amber pb-4">
-                  <div class="movie-image"> <span class="hidden"><span class="name">X-MAN</span></span> <a href="#"><img src="../assets/img/team-4-470x470.png" alt="" /></a> </div>
-                  <div class="rating flex justify-between p-2">
-                    <div class="flex">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </svg>
-                      <span class="comments">10</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="movie shadow bg-lighter-amber pb-4">
-                  <div class="movie-image"> <span class="hidden"><span class="name">X-MAN</span></span> <a href="#"><img src="../assets/img/team-4-470x470.png" alt="" /></a> </div>
-                  <div class="rating flex justify-between p-2">
-                    <div class="flex">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </svg>
-                      <span class="comments">10</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="movie shadow bg-lighter-amber pb-4">
-                  <div class="movie-image"> <span class="hidden"><span class="name">X-MAN</span></span> <a href="#"><img src="../assets/img/team-4-470x470.png" alt="" /></a> </div>
-                  <div class="rating flex justify-between p-2">
-                    <div class="flex">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </svg>
-                      <span class="comments">10</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div id="content" class="w-full mt-4">
               <div class="h-6 flex justify-between border-b-amber-100 border-b-2 mb-2">
                 <h2 class="text-xs font-anton tracking-widest">LATEST TRAILERS</h2>
                 <p class=""><a href="#">See all</a></p>
@@ -411,12 +347,13 @@
     </main>
 </template>
 <script>
-import {ref, watch} from 'vue';
-import Search from "../components/Search.vue";
+import {ref} from 'vue';
+
 import getMovies from '../composables/getMoviesFromApi'
 
 // component imports
-import Spinner from '../components/Spinner.vue'
+import Spinner from '@/components/Spinner.vue'
+import Search from '@/components/Search.vue'
 import GenresBlock from '@/components/extras/Genres.vue'
 import Upcoming from '@/components/extras/Upcoming.vue'
 import MovieList from "@/components/movie/MovieList.vue";
@@ -441,8 +378,6 @@ export default {
     const genres = ref([]);
 
     load( urlGen, props.env, page, specGenre.value)
-
-
 
 
     const MoviesNextPage = () => {

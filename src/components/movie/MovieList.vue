@@ -1,17 +1,14 @@
 <template>
-  <section class="artists pt-2 pb-8 bg-dark-amber text-amber-50 px-8">
+  <section class="artists pb-8 text-amber-50 px-8">
 
+    <div class="flex justify-between my-4">
+      <slot name="results"></slot>
 
-    <div class="flex justify-between">
-      <div class="h-16 text-amber-200">
-        <slot name="results"></slot>
-      </div>
       <div v-if="error"> {{ error }}</div>
       <slot></slot>
       <slot name="pager"></slot>
-
-
     </div>
+
     <div class="sm:grid-cols-4 md:grid-cols-6 grid-cols-1 grid gap-3 mb-10 px-4 overflow-hidden relative" v-if="movies.length">
       <div  v-for="movie in movies" :key="movie.id" class="">
         <router-link :to="'/movie/' + movie.id" class="relative group block mr-4 flex-shrink-0">
