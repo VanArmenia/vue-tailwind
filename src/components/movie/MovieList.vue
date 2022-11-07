@@ -15,6 +15,17 @@
           <img :src="fullPath + movie.poster_path" alt="Movie Poster" class="poster"/>
           <div class="absolute inset-0 bg-black opacity-75 hidden group-hover:flex flex-col justify-end text-white px-4 py-4 cursor-pointer">
             <div class="w-full">
+              <div class="card">
+                <div class="percent">
+                  <svg>
+                    <circle cx="34" cy="34" r="30"></circle>
+                    <circle cx="34" cy="34" r="30" :style="{'stroke-dashoffset': 184 - (184 * (Math.ceil(movie.vote_average * 10)))/ 100 + 'px'}"></circle>
+                  </svg>
+                  <div class="number">
+                    <h3>{{ Math.ceil(movie.vote_average * 10) }}<span>%</span></h3>
+                  </div>
+                </div>
+              </div>
               <h3 class="text-sm mb-2">{{ movie.title }}</h3>
               <p class="year">{{ movie.release_date }}</p>
             </div>
@@ -26,6 +37,7 @@
 </template>
 
 <script>
+
 export default {
   props: {
     movies: [],
