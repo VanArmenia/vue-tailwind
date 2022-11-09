@@ -68,15 +68,15 @@ nav a:first-of-type {
 .card svg circle {
   width: 100%;
   height: 100%;
-  fill: none;
   stroke: #f0f0f0;
   stroke-width: 6;
   stroke-linecap: round;
+  fill: #222222;
 }
 
 .card svg circle:last-of-type {
   stroke-dasharray: 186px;
-  stroke: #3498db;
+  stroke: #0891B2;
 }
 
 .card .number {

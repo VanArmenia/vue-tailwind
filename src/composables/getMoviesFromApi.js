@@ -21,7 +21,7 @@ const getMovies = () => {
             fetch(urlFinal)
                 .then(response => response.json())
                 .then(data => {
-                    movies.value = data.results;
+                    movies.value = data.results.filter(item => (item.poster_path !== null))
                 });
             console.log(movies.value)
         }

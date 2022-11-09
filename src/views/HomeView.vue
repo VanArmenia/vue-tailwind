@@ -2,11 +2,6 @@
     <main>
       <section class="w-full h-full bg-cover bg-hero-pattern">
         <span class="w-full h-full absolute opacity-30 bg-black"></span>
-        <div class="bottom-2 px-4 w-full justify-between px-2">
-          <!--          <Slider :genres="genres"/>-->
-
-        </div>
-
         <div class="pb-2 pt-0.5 text-amber-200 flex px-8">
           <div class="w-5/6 mr-4">
             <div v-if="error">{{ error }}</div>
@@ -194,40 +189,6 @@
                   </p>
                 </div>
               </div>
-              <div class="grid grid-cols-5">
-                <div class="px-4 col-span-2">
-                  <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg bg-cyan-600">
-                    <img alt="..."
-                         src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1051&amp;q=80"
-                         class="w-full align-middle rounded-t-lg"
-                    />
-                    <blockquote class="relative py-2 px-2">
-                      <svg
-                          preserveAspectRatio="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 583 95"
-                          class="absolute left-0 w-full block"
-                          style="height: 95px; top: -94px;"
-                      >
-                        <polygon
-                            points="-30,95 583,95 583,65"
-                            class="text-cyan-600 fill-current"
-                        ></polygon>
-                      </svg>
-                      <h4 class="text-xl font-bold text-white">
-                        Top Notch Services
-                      </h4>
-                    </blockquote>
-                  </div>
-                </div>
-                <div class="px-4 col-span-3">
-                  <p class="text-lg font-light leading-relaxed">
-                    Don't let your uses guess by attaching tooltips and popoves to
-                    any element. Just make sure you enable them first via
-                    JavaScript.
-                  </p>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -243,70 +204,6 @@
               </h3>
             </div>
             <div class="grid-cols-6 grid pt-6">
-              <div class="lg:mb-0 mb-12 px-4">
-                <div class="px-2">
-                  <img
-                      alt="..."
-                      src="../assets/img/team-1-800x800.jpg"
-                      class="shadow-lg rounded-full max-w-full mx-auto"
-                      style="max-width: 160px;"
-                  />
-                  <div class="pt-6 text-center">
-                    <h5 class="text-xl font-bold">Ryan Tompson</h5>
-                    <p class="mt-1 text-sm text-gray-500 uppercase font-semibold">
-                      Web Developer
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="lg:mb-0 mb-12 px-4">
-                <div class="px-2">
-                  <img
-                      alt="..."
-                      src="../assets/img/team-1-800x800.jpg"
-                      class="shadow-lg rounded-full max-w-full mx-auto"
-                      style="max-width: 160px;"
-                  />
-                  <div class="pt-6 text-center">
-                    <h5 class="text-xl font-bold">Ryan Tompson</h5>
-                    <p class="mt-1 text-sm text-gray-500 uppercase font-semibold">
-                      Web Developer
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="lg:mb-0 mb-12 px-4">
-                <div class="px-2">
-                  <img
-                      alt="..."
-                      src="../assets/img/team-1-800x800.jpg"
-                      class="shadow-lg rounded-full max-w-full mx-auto"
-                      style="max-width: 160px;"
-                  />
-                  <div class="pt-6 text-center">
-                    <h5 class="text-xl font-bold">Ryan Tompson</h5>
-                    <p class="mt-1 text-sm text-gray-500 uppercase font-semibold">
-                      Web Developer
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="lg:mb-0 mb-12 px-4">
-                <div class="px-2">
-                  <img
-                      alt="..."
-                      src="../assets/img/team-1-800x800.jpg"
-                      class="shadow-lg rounded-full max-w-full mx-auto"
-                      style="max-width: 160px;"
-                  />
-                  <div class="pt-6 text-center">
-                    <h5 class="text-xl font-bold">Ryan Tompson</h5>
-                    <p class="mt-1 text-sm text-gray-500 uppercase font-semibold">
-                      Web Developer
-                    </p>
-                  </div>
-                </div>
-              </div>
               <div class="lg:mb-0 mb-12 px-4">
                 <div class="px-2">
                   <img
@@ -429,6 +326,7 @@ export default {
         .then(data => {
           data.genres.unshift({id:0, name:'All'});
           genres.value = data.genres;
+          console.log(genres.value)
         });
 
 
@@ -440,8 +338,8 @@ export default {
  .noMouse {
    pointer-events: none;
  }
- .poster {
-   animation: fadein 2s;
+ .poster, .posterHover {
+   animation: fadein 1s;
  }
 
  @keyframes fadein {

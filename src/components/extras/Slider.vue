@@ -1,7 +1,12 @@
 <template>
-  <Carousel :settings="settings" v-if="genres.length" class="max-h-6 mt-1 max-w-full">
-    <Slide v-for="genre in genres" :key="genre.id" class="block">
-      <div class="carousel__item bg-amber-900 border border-amber-600 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600  "><a href="#" class="text-amber-100 text-xl">{{ genre.name}}</a></div>
+  <Carousel :settings="settings" v-if="items.length" class="mt-1">
+    <Slide v-for="item in items" :key="item.id" class="block">
+      <div class="carousel__item focus:outline-none dark:bg-gray-700 dark:border-gray-600">
+        <div class="h-16">
+          <a href="#" class="text-lg">{{ item.name}}</a>
+        </div>
+        <img :src="fullPath + item.profile_path" alt="Movie Poster" class="rounded-md"/>
+      </div>
     </Slide>
     <template #addons>
       <Navigation />
@@ -18,7 +23,8 @@ import {ref} from "vue";
 export default ({
   name: 'Slider-component',
   props: {
-    genres: Array,
+    items: Array,
+    fullPath: String,
   },
   components: {
     Carousel,
@@ -27,7 +33,7 @@ export default ({
   },
   setup() {
     const _settings = {
-      itemsToShow: 8,
+      itemsToShow: 5,
       snapAlign: 'center',
       itemsToScroll: 1
     };
@@ -48,40 +54,8 @@ export default ({
 .carousel__slide {
   padding: 5px;
 }
-
-.carousel__viewport {
-  perspective: 2000px;
-}
-
-.carousel__track {
-  transform-style: preserve-3d;
-}
-
-.carousel__slide--sliding {
-  transition: 0.5s;
-}
-
-.carousel__slide {
-  opacity: 0.9;
-  transform: rotateY(-20deg) scale(0.9);
-}
-
-.carousel__slide--active ~ .carousel__slide {
-  transform: rotateY(20deg) scale(0.9);
-}
-
-.carousel__slide--prev {
-  opacity: 1;
-  transform: rotateY(-10deg) scale(0.95);
-}
-
-.carousel__slide--next {
-  opacity: 1;
-  transform: rotateY(10deg) scale(0.95);
-}
-
-.carousel__slide--active {
-  opacity: 1;
-  transform: rotateY(0) scale(1.1);
+.carousel__prev, .carousel__next {
+  margin: 22px !important;
+  background-color: #222222 !important;
 }
 </style>
