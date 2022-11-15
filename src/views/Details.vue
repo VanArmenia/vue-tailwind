@@ -22,7 +22,10 @@
       <h2 class="text-3xl mb-4 text-gray-200 font-anton">{{ movie.title }}</h2>
       <div class="flex flex-row pb-4">
         <p v-for="genre in movie.genres" :key="genre.id"
-           class="pr-3 px-3 m-1 bg-transparent border border-amber-400 rounded-md hover:bg-amber-600 focus:outline-none inline-flex transition-all duration-300"> {{genre.name}}
+           class="pr-3 px-3 m-1 bg-transparent border border-amber-400 rounded-md hover:bg-amber-600 focus:outline-none inline-flex transition-all duration-300">
+          <router-link :to="{ name: 'Genres', params: { name: genre.name }}">
+          {{genre.name}}
+          </router-link>
         </p>
       </div>
 
@@ -70,8 +73,6 @@ export default {
   setup(props) {
 
     const route = useRoute()
-    // console.log(route)
-    console.log(route.params)
     const movie = ref( {} )
     const error = ref( '' )
     const crew = ref( {} )
@@ -84,20 +85,18 @@ export default {
       return 184 - (184 * (percent.value))/ 100
     })
 
-
+    console.log(route)
 
     const fullPath = "https://image.tmdb.org/t/p/w500"
     const youtubePath = "https://www.youtube.com/embed/"
 
-
     // fetching specific movie from Themoviedb
-    const fetchMovies = async () => {
+    const fetchMovie = async () => {
       try {
         await fetch(`https://api.themoviedb.org/3/movie/${route.params.id}?api_key=${props.env.tmdb_api_key}&language=en-US`)
             .then(response => response.json())
             .then(data => {
               movie.value = data;
-              console.log(movie.value)
             });
 
       }
@@ -105,7 +104,7 @@ export default {
         error.value = err.message
       }
     }
-    fetchMovies()
+    fetchMovie()
 
     // fetching movie crew from Themoviedb
     try {
@@ -114,8 +113,6 @@ export default {
           .then(data => {
 
             crew.value =  data.crew.filter(item => (item.known_for_department.includes('Directing')))[0];
-
-            console.log( crew.value)
 
             cast.value =  data.cast.filter(item => (item.profile_path !== null) );
           });
@@ -136,6 +133,7 @@ export default {
       catch(err) {
         error.value = err.message
       }
+
     return { error, movie, fullPath, crew, cast, offTrailer, youtubePath, percent, percentForStyle }
   },
 }

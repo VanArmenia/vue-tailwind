@@ -6,7 +6,6 @@ const getMovies = () => {
     const error = ref(null)
 
     const load = async (url, env, page, specGenre, search = "") => {
-        console.log(specGenre)
         try {
             let urlFinal = ''
             if (search !== "") {
@@ -23,7 +22,6 @@ const getMovies = () => {
                 .then(data => {
                     movies.value = data.results.filter(item => (item.poster_path !== null))
                 });
-            console.log(movies.value)
         }
         catch(err) {
             error.value = err.message

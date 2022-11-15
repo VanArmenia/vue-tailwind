@@ -81,10 +81,12 @@ export default {
 
     const MoviesNextPage = () => {
       page.value ++
+      load( urlGen, props.env, page, specGenre.value)
     }
 
     const MoviesPrevPage = () => {
       page.value --
+      load( urlGen, props.env, page, specGenre.value)
     }
 
     // filtering movies by specific genre
