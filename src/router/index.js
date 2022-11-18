@@ -8,7 +8,12 @@ import Stream from '../views/Stream.vue'
 
 
 const router = createRouter({
+  scrollBehavior(to, from, savedPosition) {
+    // always scroll to top
+    return { top: 0 }
+  },
   history: createWebHistory(import.meta.env.BASE_URL),
+
   routes: [
     {
       path: '/',
@@ -51,9 +56,10 @@ const router = createRouter({
       component: InTheatres,
     },
     {
-      path: '/stream',
+      path: '/stream/:id/:provider',
       name: 'Stream',
-      component: Stream
+      component: Stream,
+      props: true,
     }
   ]
 })

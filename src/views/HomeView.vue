@@ -112,6 +112,7 @@
               </div>
             </div>
           </div>
+          <Providers :env = 'env' />
           <div class="news flex flex-wrap mt-16 py-3 bg-lighter-amber">
             <div class="flex p-4 pt-1">
               <div class="w-3 h-3 shadow-lg rounded-full bg-amber-200 mr-2 mt-1">
@@ -193,6 +194,7 @@
           </div>
         </div>
       </section>
+
       <section class="artists pt-2 pb-48 bg-dark-amber text-amber-50">
         <div class="artists mx-auto px-4">
           <div class="flex flex-wrap mt-16 p-3 bg-lighter-amber">
@@ -253,20 +255,21 @@ import Spinner from '@/components/Spinner.vue'
 import Search from '@/components/Search.vue'
 import GenresBlock from '@/components/extras/Genres.vue'
 import Upcoming from '@/components/extras/Upcoming.vue'
+import Providers from '@/components/extras/Providers.vue'
 import MovieList from "@/components/movie/MovieList.vue";
 
 
 export default {
   name: "landing-page",
   components: {
-    Spinner, GenresBlock, Search, Upcoming, MovieList
+    Spinner, GenresBlock, Search, Upcoming, Providers, MovieList
   },
   props: {
     env: Object,
   },
   setup(props) {
     const page = ref( 1 )
-    const urlGen = 'https://api.themoviedb.org/3/discover/movie';
+    const urlGen = `https://api.themoviedb.org/3/discover/movie?api_key=${props.env.tmdb_api_key}`;
     const { movies: moviesGen, error, load } = getMovies()
     const specGenre = ref( {id:0, name:'All'} )
     const specGenreAssigned = ref({id:0, name:'All'});
@@ -274,7 +277,7 @@ export default {
     const searchTriggered = ref(false);
     const genres = ref([]);
 
-    load( urlGen, props.env, page, specGenre.value)
+    load( urlGen, page, specGenre.value)
 
 
     const MoviesNextPage = () => {
@@ -303,9 +306,9 @@ export default {
       }
       searchTriggered.value = true
       searchQuery.value = search
-      const urlSearch = 'https://api.themoviedb.org/3/search/movie';
+      const urlSearch = `https://api.themoviedb.org/3/search/movie?api_key=${props.env.tmdb_api_key}`;
       if (search !== "") {
-        load( urlSearch, props.env, page, specGenre.value, search )
+        load( urlSearch, page, specGenre.value, search )
       }
     }
 
@@ -317,7 +320,7 @@ export default {
         page.value = 1
       }
       specGenreAssigned.value = specGenre
-      load( urlGen, props.env, page, specGenre)
+      load( urlGen, page, specGenre)
     }
 
     // fetching movie genres from Themoviedb

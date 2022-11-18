@@ -33,14 +33,14 @@ export default ({
   },
   setup(props) {
     const page = ref( 1 )
-    const url = 'https://api.themoviedb.org/3/movie/upcoming';
+    const url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${props.env.tmdb_api_key}`;
     const { movies: moviesUp, error, load } = getMovies()
     const specGenre = ref( {id:0, name:'All'} )
-    load( url, props.env, page, specGenre.value)
+    load( url, page, specGenre.value)
 
     // watch the page variable change and trigger load() function
     watch(page, () => {
-      load(url, props.env, page, specGenre.value)
+      load(url, page, specGenre.value)
       console.log('watch function ran' , page.value)
     });
 

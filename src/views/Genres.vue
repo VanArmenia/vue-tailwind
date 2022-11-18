@@ -62,7 +62,7 @@ export default {
     const route = useRoute()
 
     const page = ref(1)
-    const urlGen = 'https://api.themoviedb.org/3/discover/movie';
+    const urlGen = `https://api.themoviedb.org/3/discover/movie?api_key=${props.env.tmdb_api_key}`;
     const {movies: moviesGen, error, load} = getMovies()
     const specGenre = ref({})
 
@@ -73,7 +73,7 @@ export default {
           .then(response => response.json())
           .then(data => {
             specGenre.value = data.genres.filter(item => (item.name.includes(route.params.name)))[0];
-            load( urlGen, props.env, page, specGenre.value)
+            load( urlGen, page, specGenre.value)
             console.log(specGenre.value.id)
           });
 
@@ -81,12 +81,12 @@ export default {
 
     const MoviesNextPage = () => {
       page.value ++
-      load( urlGen, props.env, page, specGenre.value)
+      load( urlGen, page, specGenre.value)
     }
 
     const MoviesPrevPage = () => {
       page.value --
-      load( urlGen, props.env, page, specGenre.value)
+      load( urlGen, page, specGenre.value)
     }
 
     // filtering movies by specific genre
@@ -96,7 +96,7 @@ export default {
         page.value = 1
       }
       specGenreAssigned.value = specGenre
-      load( urlGen, props.env, page, specGenre)
+      load( urlGen, page, specGenre)
     }
 
     return { moviesGen, error, filterByGenre, page,  MoviesNextPage, MoviesPrevPage, }

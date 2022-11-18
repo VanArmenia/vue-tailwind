@@ -5,17 +5,17 @@ const getMovies = () => {
     const movies = ref([])
     const error = ref(null)
 
-    const load = async (url, env, page, specGenre, search = "") => {
+    const load = async (url, page, specGenre, search = "") => {
         try {
             let urlFinal = ''
             if (search !== "") {
-                urlFinal = `${url}?api_key=${env.tmdb_api_key}&language=en-US&page=${page.value}&include_adult=false&query=${search}`
+                urlFinal = `${url}&language=en-US&page=${page.value}&include_adult=false&query=${search}`
             }
             else if (specGenre.id === 0) {
-                urlFinal = `${url}?api_key=${env.tmdb_api_key}&language=en-US&sort_by=popularity.desc&include_adult=false&page=${page.value}`
+                urlFinal = `${url}&language=en-US&sort_by=popularity.desc&include_adult=false&page=${page.value}&region=CZ`
             }
             else {
-                urlFinal = `${url}?api_key=${env.tmdb_api_key}&language=en-US&sort_by=popularity.desc&include_adult=false&page=${page.value}&with_genres=${specGenre.id}`
+                urlFinal = `${url}&language=en-US&sort_by=popularity.desc&include_adult=false&page=${page.value}&with_genres=${specGenre.id}`
             }
             fetch(urlFinal)
                 .then(response => response.json())
