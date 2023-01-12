@@ -12,7 +12,7 @@ const getMovies = () => {
                 urlFinal = `${url}&language=en-US&page=${page.value}&include_adult=false&query=${search}`
             }
             else if (specGenre.id === 0) {
-                urlFinal = `${url}&language=en-US&sort_by=popularity.desc&include_adult=false&page=${page.value}&region=CZ`
+                urlFinal = `${url}&language=en-US&sort_by=popularity.desc&include_adult=false&page=${page.value}&watch_region=CZ`
             }
             else {
                 urlFinal = `${url}&language=en-US&sort_by=popularity.desc&include_adult=false&page=${page.value}&with_genres=${specGenre.id}`

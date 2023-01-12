@@ -1,11 +1,11 @@
 <template>
-  <div class="flex flex-col mt-16 py-3 bg-lighter-amber">
+  <div class="flex flex-col mt-2 py-3 bg-lighter-amber">
     <div class="flex p-1 pt-1">
-      <h2 class="text-white text-2xl uppercase font-light text-left m-6 ml-4"><span class="font-bold">Explore </span>what’s streaming</h2>
+      <slot name="title"></slot>
     </div>
-    <div class="flex flex-wrap p-3">
+    <div class="flex flex-wrap p-3" >
       <div v-for="provider in providers" :key="provider.provider_id" class="p-1 py-2">
-        <router-link :to="{ name: 'Stream', params: {provider: provider.provider_name, id:provider.provider_id }}" class="relative group block mr-4 flex-shrink-0 ">
+        <router-link :to="{ name: 'Stream', params: {provider: provider.provider_name, id:provider.provider_id }}" class="relative group block mr-4 flex-shrink-0">
           <img :src="fullPath + provider.logo_path" alt="Movie Poster" class="w-16 border-amber-900 border-2 rounded-md"/>
         </router-link>
       </div>
@@ -35,7 +35,6 @@ export default ({
         .then(response => response.json())
         .then(data => {
           providers.value = data.results;
-          console.log(providers.value)
         });
 
 

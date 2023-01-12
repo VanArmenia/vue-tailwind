@@ -1,7 +1,9 @@
 <template>
   <section class="pt-2 pb-8 bg-dark-amber text-amber-50 min-h-screen">
-
-    <movie-list :movies = 'movies' :error = 'error'>
+    <Providers :env = 'env'>
+    <slot name="title"> </slot>
+    </Providers>
+    <movie-list :movies = 'moviesProv' :error = 'error'>
       <template v-slot:results>
         <h1 class="text-white text-2xl uppercase font-light text-left m-4 ml-4">Streaming now by provider <span class="font-bold">{{ provName }}</span></h1>
       </template>
@@ -29,11 +31,13 @@ import {useRoute} from "vue-router/dist/vue-router";
 
 import getMovies from "@/composables/getMoviesFromApi";
 import MovieList from "@/components/movie/MovieList.vue";
-import {ref, watch} from "vue";
+import {onBeforeMount, onUpdated, ref, watch} from "vue";
+
+import Providers from '@/components/extras/Providers.vue'
 
 export default ({
   components: {
-     MovieList
+     MovieList, Providers
   },
   props: {
     env: Object,
@@ -46,7 +50,7 @@ export default ({
     // url for movies by specific streaming provider
     const url = `https://api.themoviedb.org/3/discover/movie?api_key=${props.env.tmdb_api_key}&with_watch_providers=${route.params.id}`;
 
-    const { movies, error, load } = getMovies()
+    const { movies: moviesProv, error, load } = getMovies()
 
     const page = ref( 1 )
 
@@ -59,7 +63,12 @@ export default ({
       load( url, page, specGenre.value)
     });
 
-    return { provName, movies, page, error }
+    watch(provName, () => {
+      load( url, page, specGenre.value)
+    });
+
+    console.log(moviesProv.value)
+    return { provName,  page, error, moviesProv }
   },
 });
 </script>

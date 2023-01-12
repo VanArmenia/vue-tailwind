@@ -9,7 +9,7 @@
       <slot name="pager"></slot>
     </div>
 
-    <div class="sm:grid-cols-4 md:grid-cols-5 grid-cols-1 grid gap-3 mb-10 px-4 overflow-hidden relative" v-if="movies.length">
+    <div class="sm:grid-cols-4 md:grid-cols-6 grid-cols-1 grid gap-3 mb-10 px-4 overflow-hidden relative" v-if="movies.length">
       <div v-for="movie in movies" :key="movie.id" class="">
         <router-link :to="{ name: 'Details', params: {id: movie.id, title: movie.title }}" class="relative group block mr-4 flex-shrink-0">
           <img :src="fullPath + movie.poster_path" alt="Movie Poster" class="poster"/>

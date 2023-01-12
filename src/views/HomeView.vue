@@ -1,9 +1,13 @@
 <template>
     <main>
       <section class="w-full h-full bg-cover bg-hero-pattern">
+        <div class="w-1/6 absolute right-0 -top-4 z-10" @mouseleave="genreBlock = !genreBlock">
+          <Search  @mouseover="genreBlock = !genreBlock" @searchEvent="SearchMovies"></Search>
+          <GenresBlock v-if="genreBlock" :genres="genres" @filterByGenre="filterByGenre"/>
+        </div>
         <span class="w-full h-full absolute opacity-30 bg-black"></span>
-        <div class="pb-2 pt-0.5 text-amber-200 flex px-8">
-          <div class="w-5/6 mr-4">
+        <div class="pb-2 pt-0.5 text-amber-200 flex px-8 pt-6">
+          <div class="w-full mr-4">
             <div v-if="error">{{ error }}</div>
             <div class="my-6">
               <div class="w-full px-4 text-center flex justify-between">
@@ -37,10 +41,6 @@
             </div>
           </div>
 
-          <div class="w-1/6 mt-8">
-            <Search @searchEvent="SearchMovies"></Search>
-            <GenresBlock :genres="genres" @filterByGenre="filterByGenre"/>
-          </div>
         </div>
       </section>
       <Upcoming :env = 'env' />
@@ -112,7 +112,11 @@
               </div>
             </div>
           </div>
-          <Providers :env = 'env' />
+          <Providers :env = 'env'>
+           <template #title>
+              <h2 class="text-white text-2xl uppercase font-light text-left m-6 ml-4 mt-2"><span class="font-bold">Explore </span>what’s streaming</h2>
+            </template>
+          </Providers>
           <div class="news flex flex-wrap mt-16 py-3 bg-lighter-amber">
             <div class="flex p-4 pt-1">
               <div class="w-3 h-3 shadow-lg rounded-full bg-amber-200 mr-2 mt-1">
@@ -275,11 +279,10 @@ export default {
     const specGenreAssigned = ref({id:0, name:'All'});
     const searchQuery = ref("");
     const searchTriggered = ref(false);
+    const genreBlock = ref(false);
     const genres = ref([]);
 
     load( urlGen, page, specGenre.value)
-
-
     const MoviesNextPage = () => {
       page.value ++
       if (searchTriggered.value) {
@@ -333,7 +336,7 @@ export default {
         });
 
 
-    return { moviesGen, error, SearchMovies, genres, GenresBlock, filterByGenre, page, searchTriggered, MoviesNextPage, MoviesPrevPage, searchQuery, specGenreAssigned }
+    return { moviesGen, error, SearchMovies, genres, GenresBlock, filterByGenre, page, searchTriggered, MoviesNextPage, MoviesPrevPage, searchQuery, specGenreAssigned, genreBlock, }
   },
 }
 </script>

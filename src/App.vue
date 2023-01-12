@@ -17,7 +17,7 @@ export default {
 
 <template>
   <Navbar />
-  <RouterView :env = 'env'/>
+  <RouterView :env = 'env' :key="$route.fullPath"/>
   <FooterComponent />
 </template>
 
