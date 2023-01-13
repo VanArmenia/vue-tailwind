@@ -9,7 +9,7 @@
         <div class="pb-2 pt-0.5 text-amber-200 flex px-8 pt-6">
           <div class="w-full mr-4">
             <div v-if="error">{{ error }}</div>
-            <div class="my-6">
+            <div class="mt-6">
               <div class="w-full px-4 text-center flex justify-between">
                 <div class="w-full px-4 text-center flex justify-between">
                   <h1 class="text-white text-3xl uppercase font-light text-left">

@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import Artist from '../views/Artist.vue'
 import Details from '../views/Details.vue'
 import Genres from '../views/Genres.vue'
 import About from '../views/About.vue'
@@ -60,7 +61,16 @@ const router = createRouter({
       name: 'Stream',
       component: Stream,
       props: true,
-    }
+    },
+    {
+      path: '/artist/:id/:name',
+      name: 'Artist',
+      component: Artist,
+      props: true,
+      meta: {
+        title: 'Movie Finder - Movie'
+      }
+    },
   ]
 })
 
