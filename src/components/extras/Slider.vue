@@ -2,16 +2,16 @@
   <Carousel :settings="settings" v-if="items.length" class="mt-1">
     <Slide v-for="item in items" :key="item.id" class="block">
       <div class="carousel__item focus:outline-none dark:bg-gray-700 dark:border-gray-600">
-        <div v-if="item.profile_path" class="h-16">
-          <a href="#" class="text-lg">{{ item.name}}</a>
-        </div>
 
         <router-link v-if="item.poster_path" :to="{ name: 'Details', params: {id: item.id, title: item.title }}" class="relative group block mr-4 flex-shrink-0">
           <img :src="fullPath + item.poster_path" alt="Movie Poster" class="rounded-md"/>
         </router-link>
 
         <router-link v-if="item.profile_path" :to="{ name: 'Artist', params: {id: item.id, name: item.name }}" class="relative group block mr-4 flex-shrink-0">
-          <img v-if="item.profile_path" :src="fullPath + item.profile_path" alt="Movie Poster" class="rounded-md"/>
+          <div class="absolute inset-0 hidden group-hover:block flex-col justify-end text-white px-4 py-4 cursor-pointer posterHover z-50 bg-amber-700 rounded-md">
+            <p class="font-bold text-amber-100 text-xl">{{ item.name}}</p>
+          </div>
+          <img v-if="item.profile_path" :src="fullPath + item.profile_path" alt="Artist Profile" class="rounded-md"/>
         </router-link>
 
       </div>
@@ -42,7 +42,7 @@ export default ({
   setup() {
     const _settings = {
       itemsToShow: 6,
-      snapAlign: 'center',
+      snapAlign: 'start',
       itemsToScroll: 1
     };
 

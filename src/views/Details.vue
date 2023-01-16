@@ -1,56 +1,71 @@
 <template>
 
-  <div v-if="movie" class="p-16 flex gap-10 bg-dark-amber text-amber-50">
-    <div class="w-1/3 relative">
-      <div v-if="error" class="text-red-500 text-xl mt-6">{{ error }}</div>
-      <img :src="fullPath + movie.poster_path" alt="Movie Poster" class="poster"/>
-      <div class="card absolute top-0 -right-10">
-        <div class="percent">
-          <svg>
-            <circle cx="34" cy="34" r="30"></circle>
-            <circle cx="34" cy="34" r="30" :style="{'stroke-dashoffset': percentForStyle + 'px'}"></circle>
-          </svg>
-          <div class="number">
-            <h3>{{ Math.ceil(movie.vote_average * 10) }}<span style="font-size: 0.5rem
+  <div v-if="movie" class="bg-dark-amber text-amber-50 p-6">
+    <div class="p-2 flex gap-10">
+      <div class="w-1/3 relative">
+        <div v-if="error" class="text-red-500 text-xl mt-6">{{ error }}</div>
+        <img :src="fullPath + movie.poster_path" alt="Movie Poster" class="poster"/>
+        <div class="card absolute top-0 -right-10">
+          <div class="percent">
+            <svg>
+              <circle cx="34" cy="34" r="30"></circle>
+              <circle cx="34" cy="34" r="30" :style="{'stroke-dashoffset': percentForStyle + 'px'}"></circle>
+            </svg>
+            <div class="number">
+              <h3>{{ Math.ceil(movie.vote_average * 10) }}<span style="font-size: 0.5rem
 " class="align-super">%</span></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="w-2/3 text-gray-300 ml-8">
+        <h2 class="text-3xl mb-4 text-gray-200 font-anton">{{ movie.title }}</h2>
+        <div class="flex flex-row pb-4">
+          <p v-for="genre in movie.genres" :key="genre.id"
+             class="pr-3 px-3 m-1 bg-transparent border border-amber-400 rounded-md hover:bg-amber-600 focus:outline-none inline-flex transition-all duration-300">
+            <router-link :to="{ name: 'Genres', params: { name: genre.name }}">
+              {{genre.name}}
+            </router-link>
+          </p>
+        </div>
+
+        <p class="text-lg py-1"><span class="italic">Release Year:</span> &nbsp;{{ movie.release_date.substring(0, 4)}}</p>
+        <p class="text-lg"><span class="italic">Country: </span><span v-for="country in  movie.production_countries" :key="country.iso_3166_1">&nbsp; {{ country.iso_3166_1}}</span></p>
+
+        <p class="text-xl py-4">{{ movie.overview }}</p>
+
+        <iframe class="mt-8" v-for="item in offTrailer" :key="item.id" width="560" height="315" :src="youtubePath + item.key" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="">
+          <div class="my-6 p-2">
+            <hr class="border-amber-200 opacity-50">
+            <p class="text-amber-400 m-2 ml-0 text-xl">Director: <span class="font-bold text-amber-100">{{crew.name}}</span></p>
+            <img v-if="crew.profile_path" :src="fullPath + crew.profile_path" alt="Movie Poster" class="w-36 rounded-md"/>
+          </div>
+          <div class="my-2">
+            <hr class="border-amber-200 opacity-50">
+            <p class="text-amber-400 m-2 ml-0 text-2xl"> Stars</p>
+            <div class="mb-10">
+              <Slider :items = 'cast' :fullPath = 'fullPath'/>
+            </div>
+          </div>
+          <div class="flex flex-col mt-2 py-3 bg-lighter-amber">
+            <p class="text-amber-400 m-2 ml-0 text-xl p-2"> Stream</p>
+            <div class="flex flex-wrap p-3" >
+              <div v-for="provider in providers" :key="provider.provider_id" class="p-1 py-2">
+                <router-link :to="{ name: 'Stream', params: {provider: provider.provider_name, id:provider.provider_id }}" class="relative group block mr-4 flex-shrink-0">
+                  <img :src="fullPath + provider.logo_path" alt="Movie Poster" class="w-16 border-amber-900 border-2 rounded-md"/>
+                </router-link>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="w-2/3 text-gray-300 ml-8">
-      <h2 class="text-3xl mb-4 text-gray-200 font-anton">{{ movie.title }}</h2>
-      <div class="flex flex-row pb-4">
-        <p v-for="genre in movie.genres" :key="genre.id"
-           class="pr-3 px-3 m-1 bg-transparent border border-amber-400 rounded-md hover:bg-amber-600 focus:outline-none inline-flex transition-all duration-300">
-          <router-link :to="{ name: 'Genres', params: { name: genre.name }}">
-          {{genre.name}}
-          </router-link>
-        </p>
-      </div>
-
-
-      <p class="text-lg py-1"><span class="italic">Release Year:</span> &nbsp;{{ movie.release_date.substring(0, 4)}}</p>
-      <p class="text-lg"><span class="italic">Country: </span><span v-for="country in  movie.production_countries" :key="country.iso_3166_1">&nbsp; {{ country.iso_3166_1}}</span></p>
-
-      <p class="text-xl py-4">{{ movie.overview }}</p>
-
-      <iframe class="mt-8" v-for="item in offTrailer" :key="item.id" width="560" height="315" :src="youtubePath + item.key" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      <div class="">
-        <div class="my-6">
-          <p class="underline text-amber-400">Director:</p>
-          <p class="text-lg"> {{crew.name}}</p>
-          <img v-if="crew.profile_path" :src="fullPath + crew.profile_path" alt="Movie Poster" class="w-36 rounded-md"/>
-        </div>
-        <div class="my-6">
-          <p class="underline text-amber-400"> Stars:</p>
-          <div class="mb-36">
-            <Slider :items = 'cast' :fullPath = 'fullPath'/>
-          </div>
-        </div>
-      </div>
-      </div>
+    <div class="m-4 mb-12">
+      <p class="text-amber-400 m-2 text-2xl"> Similar movies</p>
+      <Slider :items = 'simMovies.results' :fullPath = 'fullPath'/>
     </div>
+  </div>
   <div v-else>
     <Spinner />
   </div>
@@ -74,6 +89,8 @@ export default {
 
     const route = useRoute()
     const movie = ref( {} )
+    const providers = ref( {} )
+    const simMovies = ref( {} )
     const error = ref( '' )
     const crew = ref( {} )
     const cast = ref( {} )
@@ -85,7 +102,6 @@ export default {
       return 184 - (184 * (percent.value))/ 100
     })
 
-    console.log(route)
 
     const fullPath = "https://image.tmdb.org/t/p/w500"
     const youtubePath = "https://www.youtube.com/embed/"
@@ -105,6 +121,21 @@ export default {
       }
     }
     fetchMovie()
+
+    // fetching similar movies
+    const similarMovies = async () => {
+      try {
+        await fetch(`https://api.themoviedb.org/3/movie/${route.params.id}/similar?api_key=${props.env.tmdb_api_key}&language=en-US`)
+            .then(response => response.json())
+            .then(data => {
+              simMovies.value = data;
+            });
+      }
+      catch(err) {
+        error.value = err.message
+      }
+    }
+    similarMovies()
 
     // fetching movie crew from Themoviedb
     try {
@@ -134,7 +165,21 @@ export default {
         error.value = err.message
       }
 
-    return { error, movie, fullPath, crew, cast, offTrailer, youtubePath, percent, percentForStyle }
+      // providers
+    try {
+      fetch(`https://api.themoviedb.org/3/movie/${route.params.id}/watch/providers?api_key=${props.env.tmdb_api_key}&language=en-US`)
+          .then(response => response.json())
+          .then(data => {
+            providers.value = data;
+            providers.value =  providers.value.results.CZ.flatrate
+            console.log(  providers.value.results.CZ.flatrate)
+          });
+    }
+    catch(err) {
+      error.value = err.message
+    }
+
+    return { error, movie, fullPath, crew, cast, offTrailer, youtubePath, percent, percentForStyle, simMovies, providers }
   },
 }
 </script>
