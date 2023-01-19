@@ -5,7 +5,7 @@
     </Providers>
     <movie-list :movies = 'moviesProv' :error = 'error'>
       <template v-slot:results>
-        <h1 class="text-white text-2xl uppercase font-light text-left m-4 ml-4">Streaming now by provider <span class="font-bold">{{ provName }}</span></h1>
+        <h1 class="text-white text-xl md:text-2xl uppercase font-light text-left m-4 ml-4">Streaming now by provider <span class="font-bold">{{ provName }}</span></h1>
       </template>
       <template v-slot:pager>
         <div class="m-4">

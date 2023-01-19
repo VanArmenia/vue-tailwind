@@ -1,5 +1,5 @@
 <template>
-  <section class="artists pb-8 text-amber-50 px-8">
+  <section class="artists pb-8 text-amber-50 md:px-8">
 
     <div class="flex justify-between my-4">
       <slot name="results"></slot>
@@ -9,7 +9,7 @@
       <slot name="pager"></slot>
     </div>
 
-    <div class="sm:grid-cols-4 md:grid-cols-6 grid-cols-1 grid gap-3 mb-10 px-4 overflow-hidden relative" v-if="movies.length">
+    <div class="grid-cols-2 md:grid-cols-6 grid gap-3 mb-10 px-4 overflow-hidden relative" v-if="movies.length">
       <div v-for="movie in movies" :key="movie.id" class="">
         <router-link :to="{ name: 'Details', params: {id: movie.id, title: movie.title }}" class="relative group block mr-4 flex-shrink-0">
           <img :src="fullPath + movie.poster_path" alt="Movie Poster" class="poster"/>

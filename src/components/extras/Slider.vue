@@ -41,10 +41,22 @@ export default ({
   },
   setup() {
     const _settings = {
-      itemsToShow: 6,
       snapAlign: 'start',
-      itemsToScroll: 1
-    };
+      itemsToScroll: 1,
+      breakpoints: {
+            200: {
+              itemsToShow: 2,
+              snapAlign: 'center',
+            },
+            700: {
+              itemsToShow: 4,
+              snapAlign: 'center',
+            },
+            1024: {
+              itemsToShow: 6,
+              snapAlign: 'start',
+            },
+    }};
 
     const settings = ref(_settings);
     // const handelDeleteImage = (index: number) => images.value.splice(index, 1);

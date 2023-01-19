@@ -1,6 +1,6 @@
 <template>
-  <section class="artists pt-2 pb-8 bg-dark-amber text-amber-50 px-12">
-    <h1 class="text-white text-3xl uppercase font-light text-left my-8 ml-4">Coming <span class="font-bold">Soon</span></h1>
+  <section class="artists pt-2 pb-8 bg-dark-amber text-amber-50 md:px-12 px-2">
+    <h1 class="text-white md:text-3xl text-xl uppercase font-light text-left my-8 ml-4">Coming <span class="font-bold">Soon</span></h1>
     <Slider :items = 'moviesUp' :fullPath = 'fullPath'/>
   </section>
 </template>

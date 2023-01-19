@@ -1,18 +1,18 @@
 <template>
     <main>
       <section class="w-full h-full bg-cover bg-hero-pattern">
-        <div class="w-1/6 absolute right-0 -top-4 z-10" @mouseleave="genreBlock = !genreBlock">
+        <div class="w-full md:w-1/6 absolute right-0 md:-top-4 z-10 flex" @mouseleave="genreBlock = !genreBlock">
           <Search  @mouseover="genreBlock = !genreBlock" @searchEvent="SearchMovies"></Search>
           <GenresBlock v-if="genreBlock" :genres="genres" @filterByGenre="filterByGenre"/>
         </div>
         <span class="w-full h-full absolute opacity-30 bg-black"></span>
-        <div class="pb-2 pt-0.5 text-amber-200 flex px-8 pt-6">
+        <div class="pb-2 pt-0.5 text-amber-200 flex md:px-8 pt-6">
           <div class="w-full mr-4">
             <div v-if="error">{{ error }}</div>
             <div class="mt-6">
               <div class="w-full px-4 text-center flex justify-between">
                 <div class="w-full px-4 text-center flex justify-between">
-                  <h1 class="text-white text-3xl uppercase font-light text-left">
+                  <h1 class="text-white md:text-3xl text-xl uppercase font-light text-left">
                     <span class="font-bold"> arthouse </span> movies hub
                   </h1>
                   <div class="flex pt-2 mx-2 h-12">
