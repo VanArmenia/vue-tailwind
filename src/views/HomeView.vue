@@ -112,7 +112,7 @@
               </div>
             </div>
           </div>
-          <Providers :env = 'env'>
+          <Providers :env = 'env' :show = 'show' :opt_class = 'opt_class'>
            <template #title>
               <h2 class="text-white text-2xl uppercase font-light text-left m-6 ml-4 mt-2"><span class="font-bold">Explore </span>what’s streaming</h2>
             </template>
@@ -280,7 +280,9 @@ export default {
     const searchQuery = ref("");
     const searchTriggered = ref(false);
     const genreBlock = ref(false);
+    const opt_class = ref(false);
     const genres = ref([]);
+    const show = ref(true);
 
     load( urlGen, page, specGenre.value)
     const MoviesNextPage = () => {
@@ -336,7 +338,7 @@ export default {
         });
 
 
-    return { moviesGen, error, SearchMovies, genres, GenresBlock, filterByGenre, page, searchTriggered, MoviesNextPage, MoviesPrevPage, searchQuery, specGenreAssigned, genreBlock, }
+    return { moviesGen, error, SearchMovies, genres, GenresBlock, filterByGenre, page, searchTriggered, MoviesNextPage, MoviesPrevPage, searchQuery, specGenreAssigned, genreBlock, show, opt_class}
   },
 }
 </script>
