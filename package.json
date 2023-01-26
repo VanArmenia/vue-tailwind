@@ -8,6 +8,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "countries-and-timezones": "^3.4.0",
     "firebase": "^9.9.3",
     "vue": "^3.2.36",
     "vue-router": "^4.0.15",

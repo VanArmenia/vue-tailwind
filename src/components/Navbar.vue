@@ -11,7 +11,13 @@
           <RouterLink to="/" >Home</RouterLink>
         </li>
         <li class="md:px-1 py-2">
-          <RouterLink to="/stream" >Stream/Buy</RouterLink>
+          <RouterLink  :to="{
+                              name: 'Stream',
+                              params: {
+                              id: '8',
+                              provider: 'Netflix'
+                               }
+                             }">Stream/Buy</RouterLink>
         </li>
         <li class="md:px-1 py-2">
           <RouterLink to="/theatres" >In Theatres</RouterLink>

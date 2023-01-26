@@ -1,5 +1,5 @@
 <template>
-  <Carousel :settings="settings" v-if="items.length" class="mt-1">
+  <Carousel :settings="settings" v-if="items" class="mt-1">
     <Slide v-for="item in items" :key="item.id" class="block">
       <div class="carousel__item focus:outline-none dark:bg-gray-700 dark:border-gray-600">
 

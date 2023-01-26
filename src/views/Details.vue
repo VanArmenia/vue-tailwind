@@ -29,30 +29,30 @@
           </p>
         </div>
 
-        <p class="text-lg py-1"><span class="italic">Release Year:</span> &nbsp;{{ movie.release_date.substring(0, 4)}}</p>
-        <p class="text-lg"><span class="italic">Country: </span><span v-for="country in  movie.production_countries" :key="country.iso_3166_1">&nbsp; {{ country.iso_3166_1}}</span></p>
+        <p class="text-lg py-1" v-if="movie"><span class="italic">Release Year:</span> &nbsp;{{ movie.release_date.substring(0, 4)}}</p>
+        <p class="text-lg" v-if="movie"><span class="italic">Country: </span><span v-for="country in  movie.production_countries" :key="country.iso_3166_1">&nbsp; {{ country.iso_3166_1}}</span></p>
 
         <p class="text-xl py-4">{{ movie.overview }}</p>
 
         <iframe class="mt-8" v-for="item in offTrailer" :key="item.id" width="560" height="315" :src="youtubePath + item.key" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <div class="">
+        <div class="" v-if="crew">
           <div class="my-6 p-2">
             <hr class="border-amber-200 opacity-50">
             <p class="text-amber-400 m-2 ml-0 text-xl">Director: <span class="font-bold text-amber-100">{{crew.name}}</span></p>
             <img v-if="crew.profile_path" :src="fullPath + crew.profile_path" alt="Movie Poster" class="w-36 rounded-md"/>
           </div>
-          <div class="my-2">
+          <div class="my-2" v-if="cast">
             <hr class="border-amber-200 opacity-50">
             <p class="text-amber-400 m-2 ml-0 text-2xl"> Stars</p>
             <div class="mb-10">
               <Slider :items = 'cast' :fullPath = 'fullPath'/>
             </div>
           </div>
-          <div class="flex flex-col mt-2 py-3 bg-lighter-amber">
+          <div v-if="providersFiltered" class="flex flex-col mt-2 py-3 bg-lighter-amber">
             <p class="text-amber-400 m-2 ml-0 text-xl p-2"> Stream</p>
             <div class="flex flex-wrap p-3" >
-              <div v-for="provider in providers" :key="provider.provider_id" class="p-1 py-2">
-                <router-link :to="{ name: 'Stream', params: {provider: provider.provider_name, id:provider.provider_id }}" class="relative group block mr-4 flex-shrink-0">
+              <div v-for="provider in providersFiltered" :key="provider.provider_id" class="p-1 py-2">
+                <router-link :to="{ name: 'Stream', params: {id:provider.provider_id, provider: provider.provider_name }}" class="relative group block mr-4 flex-shrink-0">
                   <img :src="fullPath + provider.logo_path" alt="Movie Poster" class="w-16 border-amber-900 border-2 rounded-md"/>
                 </router-link>
               </div>
@@ -61,7 +61,7 @@
         </div>
       </div>
     </div>
-    <div class="m-4 mb-12">
+    <div class="m-4 mb-12" v-if="simMovies">
       <p class="text-amber-400 m-2 text-2xl"> Similar movies</p>
       <Slider :items = 'simMovies.results' :fullPath = 'fullPath'/>
     </div>
@@ -74,6 +74,7 @@
 
 <script>
 import { useRoute } from 'vue-router'
+import ct from  'countries-and-timezones'
 // component imports
 
 import Spinner from '../components/Spinner.vue'
@@ -90,6 +91,7 @@ export default {
     const route = useRoute()
     const movie = ref( {} )
     const providers = ref( {} )
+    const providersFiltered = ref( {} )
     const simMovies = ref( {} )
     const error = ref( '' )
     const crew = ref( {} )
@@ -101,15 +103,20 @@ export default {
     const percentForStyle = computed(() => {
       return 184 - (184 * (percent.value))/ 100
     })
+    const zone = Intl.DateTimeFormat().resolvedOptions().timeZone
+    console.log(zone)
+    const countries = ct.getCountryForTimezone(zone);
+    console.log(countries)
+
 
 
     const fullPath = "https://image.tmdb.org/t/p/w500"
     const youtubePath = "https://www.youtube.com/embed/"
 
     // fetching specific movie from Themoviedb
-    const fetchMovie = async () => {
+    const fetchMovie = () => {
       try {
-        await fetch(`https://api.themoviedb.org/3/movie/${route.params.id}?api_key=${props.env.tmdb_api_key}&language=en-US`)
+         fetch(`https://api.themoviedb.org/3/movie/${route.params.id}?api_key=${props.env.tmdb_api_key}&language=en-US`)
             .then(response => response.json())
             .then(data => {
               movie.value = data;
@@ -123,9 +130,9 @@ export default {
     fetchMovie()
 
     // fetching similar movies
-    const similarMovies = async () => {
+    const similarMovies = () => {
       try {
-        await fetch(`https://api.themoviedb.org/3/movie/${route.params.id}/similar?api_key=${props.env.tmdb_api_key}&language=en-US`)
+      fetch(`https://api.themoviedb.org/3/movie/${route.params.id}/similar?api_key=${props.env.tmdb_api_key}&language=en-US`)
             .then(response => response.json())
             .then(data => {
               simMovies.value = data;
@@ -142,7 +149,6 @@ export default {
       fetch(`https://api.themoviedb.org/3/movie/${route.params.id}/credits?api_key=${props.env.tmdb_api_key}&language=en-US`)
           .then(response => response.json())
           .then(data => {
-
             crew.value =  data.crew.filter(item => (item.known_for_department.includes('Directing')))[0];
 
             cast.value =  data.cast.filter(item => (item.profile_path !== null) );
@@ -170,16 +176,17 @@ export default {
       fetch(`https://api.themoviedb.org/3/movie/${route.params.id}/watch/providers?api_key=${props.env.tmdb_api_key}&language=en-US`)
           .then(response => response.json())
           .then(data => {
-            providers.value = data;
-            providers.value =  providers.value.results.CZ.flatrate
-            console.log(  providers.value.results.CZ.flatrate)
+            providers.value = data.results;
+            providersFiltered.value =  providers.value.hasOwnProperty('CZ')? providers.value.CZ.flatrate : null
+            console.log( providersFiltered.value)
           });
     }
     catch(err) {
       error.value = err.message
     }
 
-    return { error, movie, fullPath, crew, cast, offTrailer, youtubePath, percent, percentForStyle, simMovies, providers }
+
+    return { error, movie, fullPath, crew, cast, offTrailer, youtubePath, percent, percentForStyle, simMovies, providersFiltered }
   },
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
   <section class="pt-2 pb-8 bg-dark-amber text-amber-50 min-h-screen">
 
-      <movie-list :movies = 'movies' :error = 'error' :page = 'page'>
+      <movie-list :movies = 'moviesInTheatres' :error = 'error' :page = 'page'>
         <template v-slot:pager>
           <div class="m-4">
             <div class="flex pt-2 mx-2 h-12">
@@ -36,18 +36,19 @@ export default ({
   },
   setup(props) {
     const page = ref( 1 )
-    const url = 'https://api.themoviedb.org/3/movie/now_playing';
-    const { movies, error, load } = getMovies()
+    const url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${props.env.tmdb_api_key}&region=CZ`;
+    const { movies: moviesInTheatres, error, load } = getMovies()
     const specGenre = ref( {id:0, name:'All'} )
-    load( url, props.env, page, specGenre.value)
+
+    load( url, page, specGenre.value)
+
 
     // watch the page variable change and trigger load() function
     watch(page, () => {
-      load(url, props.env, page, specGenre.value)
-      console.log('watch function ran' , page.value)
+      load( url, page, specGenre.value)
     });
 
-    return { movies, error, load, page }
+    return { moviesInTheatres, error, load, page }
   },
 });
 </script>

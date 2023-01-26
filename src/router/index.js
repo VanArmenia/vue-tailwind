@@ -29,7 +29,6 @@ const router = createRouter({
       path: '/movie/:id/:title',
       name: 'Details',
       component: Details,
-      props: true,
       meta: {
         title: 'Movie Finder - Movie'
       }
@@ -55,12 +54,18 @@ const router = createRouter({
       path: '/theatres',
       name: 'In Theatres',
       component: InTheatres,
+      meta: {
+        title: 'In Theatres'
+      }
     },
     {
       path: '/stream/:id/:provider',
       name: 'Stream',
       component: Stream,
       props: true,
+      meta: {
+        title: 'Movie Finder - Movie'
+      }
     },
     {
       path: '/artist/:id/:name',
