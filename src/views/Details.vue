@@ -1,12 +1,12 @@
 <template>
 
-  <div v-if="movie" class="bg-dark-amber text-amber-50 p-6">
-    <div class="p-2 flex gap-10">
-      <div class="w-1/3 relative">
+  <div v-if="movie" class="bg-dark-amber text-amber-50 px-8 py-4">
+    <div class="p-2 md:flex gap-10">
+      <div class="md:w-1/3 relative w-full">
         <div v-if="error" class="text-red-500 text-xl mt-6">{{ error }}</div>
-        <img :src="fullPath + movie.poster_path" alt="Movie Poster" class="poster"/>
+        <img :src="fullPath + movie.poster_path" alt="Movie Poster" class=""/>
         <div class="card absolute top-0 -right-10">
-          <div class="percent">
+          <div class="">
             <svg>
               <circle cx="34" cy="34" r="30"></circle>
               <circle cx="34" cy="34" r="30" :style="{'stroke-dashoffset': percentForStyle + 'px'}"></circle>
@@ -18,11 +18,11 @@
           </div>
         </div>
       </div>
-      <div class="w-2/3 text-gray-300 ml-8">
-        <h2 class="text-3xl mb-4 text-gray-200 font-anton">{{ movie.title }}</h2>
+      <div class="md:w-2/3 text-gray-300 md:ml-8 w-full">
+        <h2 class="text-3xl my-4 md:my-0 md:mb-4 text-gray-200 font-anton">{{ movie.title }}</h2>
         <div class="flex flex-row pb-4">
           <p v-for="genre in movie.genres" :key="genre.id"
-             class="pr-3 px-3 m-1 bg-transparent border border-amber-400 rounded-md hover:bg-amber-600 focus:outline-none inline-flex transition-all duration-300">
+             class="pr-3 px-3 mr-2 bg-transparent border border-amber-400 rounded-md hover:bg-amber-600 focus:outline-none inline-flex transition-all duration-300">
             <router-link :to="{ name: 'Genres', params: { name: genre.name }}">
               {{genre.name}}
             </router-link>
@@ -34,35 +34,37 @@
 
         <p class="text-xl py-4">{{ movie.overview }}</p>
 
-        <iframe class="mt-8" v-for="item in offTrailer" :key="item.id" width="560" height="315" :src="youtubePath + item.key" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe class="mt-8 w-full h-60 md:w-3/4 xl:w-1/2 xl:h-72" v-for="item in offTrailer" :key="item.id"  :src="youtubePath + item.key" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         <div class="" v-if="crew">
-          <div class="my-6 p-2">
-            <hr class="border-amber-200 opacity-50">
-            <p class="text-amber-400 m-2 ml-0 text-xl">Director: <span class="font-bold text-amber-100">{{crew.name}}</span></p>
+          <p class="text-amber-400 mt-4 ml-0 text-xl">Director: <span class="font-bold text-amber-100">{{crew.name}}</span></p>
+          <div class="my-6 p-2 bg-lighter-amber">
             <img v-if="crew.profile_path" :src="fullPath + crew.profile_path" alt="Movie Poster" class="w-36 rounded-md"/>
           </div>
           <div class="my-2" v-if="cast">
-            <hr class="border-amber-200 opacity-50">
-            <p class="text-amber-400 m-2 ml-0 text-2xl"> Stars</p>
+            <p class="text-amber-400 m-2 ml-0 text-xl "> Stars</p>
+
             <div class="mb-10">
               <Slider :items = 'cast' :fullPath = 'fullPath'/>
             </div>
           </div>
-          <div v-if="providersFiltered" class="flex flex-col mt-2 py-3 bg-lighter-amber">
-            <p class="text-amber-400 m-2 ml-0 text-xl p-2"> Stream</p>
-            <div class="flex flex-wrap p-3" >
-              <div v-for="provider in providersFiltered" :key="provider.provider_id" class="p-1 py-2">
-                <router-link :to="{ name: 'Stream', params: {id:provider.provider_id, provider: provider.provider_name }}" class="relative group block mr-4 flex-shrink-0">
-                  <img :src="fullPath + provider.logo_path" alt="Movie Poster" class="w-16 border-amber-900 border-2 rounded-md"/>
-                </router-link>
+          <div v-if="providersFiltered">
+            <p class="text-amber-400 m-2 ml-0 text-xl py-2"> Stream</p>
+            <div  class="flex flex-col mt-2 py-1 bg-lighter-amber">
+              <div class="flex flex-wrap p-1" >
+                <div v-for="provider in providersFiltered" :key="provider.provider_id" class="p-1 py-2">
+                  <router-link :to="{ name: 'Stream', params: {id:provider.provider_id, provider: provider.provider_name }}" class="relative group block mr-4 flex-shrink-0">
+                    <img :src="fullPath + provider.logo_path" alt="Movie Poster" class="w-12 border-amber-900 border-2 rounded-md"/>
+                  </router-link>
+                </div>
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
     <div class="m-4 mb-12" v-if="simMovies">
-      <p class="text-amber-400 m-2 text-2xl"> Similar movies</p>
+      <p class="text-amber-400 my-2 text-xl"> Similar movies</p>
       <Slider :items = 'simMovies.results' :fullPath = 'fullPath'/>
     </div>
   </div>

@@ -15,7 +15,7 @@
     <div :class="{ 'left-2': opt_class, 'right-2': opt_class, absolute: opt_class }" class="p-3 mb-4 bg-amber-200 rounded-lg shadow-lg overflow-hidden z-30 flex flex-wrap" v-show="show">
       <div v-for="provider in providers" :key="provider.provider_id" class="p-1 py-2 providers">
         <router-link :to="{ name: 'Stream', params: {provider: provider.provider_name, id:provider.provider_id }}" class="relative group block mr-4 flex-shrink-0">
-          <img :src="fullPath + provider.logo_path" alt="Movie Poster" class="w-12 border-amber-900 border-2 rounded-md"/>
+          <img :src="fullPath + provider.logo_path" alt="Movie Poster" class="w-10 md:w-12 border-amber-900 border-2 rounded-md"/>
         </router-link>
       </div>
     </div>
