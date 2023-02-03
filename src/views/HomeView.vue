@@ -1,9 +1,18 @@
 <template>
     <main>
       <section class="w-full h-full bg-cover bg-hero-pattern">
-        <div class="w-full md:w-1/6 absolute right-0 md:-top-4 z-10 flex" @mouseleave="genreBlock = !genreBlock">
-          <Search  @mouseover="genreBlock = !genreBlock" @searchEvent="SearchMovies"></Search>
-          <GenresBlock v-if="genreBlock" :genres="genres" @filterByGenre="filterByGenre"/>
+        <div class="w-full md:w-1/6 absolute right-0 md:-top-4 z-10 flex">
+          <Search  @click="showGenres = !showGenres" @searchEvent="SearchMovies"></Search>
+          <transition
+              enter-active-class="transform transition duration-500 ease-custom"
+              enter-from-class="-translate-y-1/2 scale-y-0 opacity-0"
+              enter-to-class="translate-y-0 scale-y-100 opacity-100"
+              leave-active-class="transform transition duration-500 ease-custom"
+              leave-from-class="translate-y-0 scale-y-100 opacity-100"
+              leave-to-class="-translate-y-1/2 scale-y-0 opacity-0"
+          >
+          <GenresBlock v-if="showGenres" :genres="genres" @filterByGenre="filterByGenre"/>
+          </transition>
         </div>
         <span class="w-full h-full absolute opacity-30 bg-black"></span>
         <div class="pb-2 pt-0.5 text-amber-200 flex md:px-8 pt-6">
@@ -250,7 +259,7 @@
     </main>
 </template>
 <script>
-import {ref} from 'vue';
+import {onMounted, ref} from 'vue';
 
 import getMovies from '../composables/getMoviesFromApi'
 
@@ -279,10 +288,10 @@ export default {
     const specGenreAssigned = ref({id:0, name:'All'});
     const searchQuery = ref("");
     const searchTriggered = ref(false);
-    const genreBlock = ref(false);
     const opt_class = ref(false);
     const genres = ref([]);
     const show = ref(true);
+    const showGenres = ref(false);
 
     load( urlGen, page, specGenre.value)
     const MoviesNextPage = () => {
@@ -326,6 +335,7 @@ export default {
       }
       specGenreAssigned.value = specGenre
       load( urlGen, page, specGenre)
+      showGenres.value = false
     }
 
     // fetching movie genres from Themoviedb
@@ -338,7 +348,7 @@ export default {
         });
 
 
-    return { moviesGen, error, SearchMovies, genres, GenresBlock, filterByGenre, page, searchTriggered, MoviesNextPage, MoviesPrevPage, searchQuery, specGenreAssigned, genreBlock, show, opt_class}
+    return { moviesGen, error, SearchMovies, genres, GenresBlock, filterByGenre, page, searchTriggered, MoviesNextPage, MoviesPrevPage, searchQuery, specGenreAssigned, show, opt_class, showGenres}
   },
 }
 </script>

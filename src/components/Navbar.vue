@@ -20,7 +20,7 @@
                              }">Stream/Buy</RouterLink>
         </li>
         <li class="md:px-1 py-2">
-          <RouterLink to="/theatres" >In Theatres</RouterLink>
+          <RouterLink to="/theatres">In Theatres</RouterLink>
         </li>
         <li class="md:px-1 py-2">
           <RouterLink to="/about" >About Us</RouterLink>
@@ -46,13 +46,27 @@
     </div>
 
     <!-- Mobile menu -->
-    <div v-if="mobile" class="bg-neutral-900 absolute top-12 z-50">
+    <transition
+        enter-active-class="transform transition duration-500 ease-custom"
+        enter-from-class="-translate-y-1/2 scale-y-0 opacity-0"
+        enter-to-class="translate-y-0 scale-y-100 opacity-100"
+        leave-active-class="transform transition duration-500 ease-custom"
+        leave-from-class="translate-y-0 scale-y-100 opacity-100"
+        leave-to-class="-translate-y-1/2 scale-y-0 opacity-0"
+    >
+    <div v-if="mobile" class="bg-neutral-900 absolute top-12 z-50 mobileMenu rounded-lg">
       <ul data-menu class="text-amber-600 tracking-wider items-center text-gray-100 text-sm shrink-0 pt-1.5">
         <li class="md:px-1 py-2">
           <RouterLink to="/" >Home</RouterLink>
         </li>
         <li class="md:px-1 py-2">
-          <RouterLink to="/stream" >Stream/Buy</RouterLink>
+          <RouterLink :to="{
+                              name: 'Stream',
+                              params: {
+                              id: '8',
+                              provider: 'Netflix'
+                               }
+                             }" >Stream/Buy</RouterLink>
         </li>
         <li class="md:px-1 py-2">
           <RouterLink to="/theatres" >In Theatres</RouterLink>
@@ -62,16 +76,23 @@
         </li>
       </ul>
     </div>
+    </transition>
   </nav>
 </template>
 <script>
 
-import {ref} from "vue";
+import { ref, watch} from "vue";
+import {useRoute} from "vue-router/dist/vue-router";
 
 export default {
   setup() {
+    const route = useRoute()
     const mobile = ref(false);
 
+    watch(() => route.name, showMobile)
+    function showMobile() {
+      mobile.value = false;
+    }
     return {mobile}
   }
 }
