@@ -1,14 +1,14 @@
 import { ref } from 'vue'
 import { db, doc, getDoc } from '../firebase/config'
 
-const getMovie = (id) => {
+const getArticle = (id) => {
 
-    const movie = ref([])
+    const article = ref([])
     const error = ref(null)
 
     const load = async () => {
         try {
-            const docRef = doc(db, "Movies", id);
+            const docRef = doc(db, "News", id);
             const res = await getDoc(docRef);
 
             console.log(res)
@@ -16,7 +16,7 @@ const getMovie = (id) => {
             if (!res.exists()) {
                 throw Error('That movie does not exist')
             }
-            movie.value = { ...res.data(), id: res.id }
+            article.value = { ...res.data(), id: res.id }
             // console.log(movie.value)
         }
         catch(err) {
@@ -24,7 +24,7 @@ const getMovie = (id) => {
         }
     }
 
-    return { movie, error, load }
+    return { article, error, load }
 }
 
-export default getMovie
+export default getArticle

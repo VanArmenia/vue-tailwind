@@ -56,150 +56,49 @@
 
       <section class="pb-2 bg-dark-amber pt-0.5 text-amber-200">
         <div class="mx-auto px-4">
-          <div class="flex flex-wrap mt-4">
-            <div id="content" class="w-full">
-              <div class="h-6 flex justify-between border-b-amber-100 border-b-2 mb-2">
-                <h2 class="text-xs font-anton tracking-widest">LATEST TRAILERS</h2>
-                <p class=""><a href="#">See all</a></p>
-              </div>
-              <div class="box w-full grid grid-cols-5 gap-4">
-                <div class="movie shadow bg-lighter-amber pb-4">
-                  <div class="movie-image"> <span class="hidden"><span class="name">X-MAN</span></span> <a href="#"><img src="../assets/img/team-4-470x470.png" alt="" /></a> </div>
-                  <div class="rating flex justify-between p-2">
-                    <div class="flex">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </svg>
-                      <span class="comments">10</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="movie shadow bg-lighter-amber pb-4">
-                  <div class="movie-image"> <span class="hidden"><span class="name">X-MAN</span></span> <a href="#"><img src="../assets/img/team-4-470x470.png" alt="" /></a> </div>
-                  <div class="rating flex justify-between p-2">
-                    <div class="flex">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </svg>
-                      <span class="comments">10</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="movie shadow bg-lighter-amber pb-4">
-                  <div class="movie-image"> <span class="hidden"><span class="name">X-MAN</span></span> <a href="#"><img src="../assets/img/team-4-470x470.png" alt="" /></a> </div>
-                  <div class="rating flex justify-between p-2">
-                    <div class="flex">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </svg>
-                      <span class="comments">10</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="movie shadow bg-lighter-amber pb-4">
-                  <div class="movie-image"> <span class="hidden"><span class="name">X-MAN</span></span> <a href="#"><img src="../assets/img/team-4-470x470.png" alt="" /></a> </div>
-                  <div class="rating flex justify-between p-2">
-                    <div class="flex">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </svg>
-                      <span class="comments">10</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="movie shadow bg-lighter-amber pb-4">
-                  <div class="movie-image"> <span class="hidden"><span class="name">X-MAN</span></span> <a href="#"><img src="../assets/img/team-4-470x470.png" alt="" /></a> </div>
-                  <div class="rating flex justify-between p-2">
-                    <div class="flex">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </svg>
-                      <span class="comments">10</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
           <Providers :env = 'env' :show = 'show' :opt_class = 'opt_class'>
            <template #title>
-              <h2 class="text-white text-2xl uppercase font-light text-left m-6 ml-4 mt-2"><span class="font-bold">Explore </span>what’s streaming</h2>
+              <h2 class="text-white text-xl md:text-2xl uppercase font-light text-left m-6 ml-0 mt-2"><span class="font-bold">Explore </span>what’s streaming</h2>
             </template>
           </Providers>
-          <div class="news flex flex-wrap mt-16 py-3 bg-lighter-amber">
+          <div v-if="news" class="news flex flex-wrap mt-16 py-1 bg-lighter-amber">
             <div class="flex p-4 pt-1">
-              <div class="w-3 h-3 shadow-lg rounded-full bg-amber-200 mr-2 mt-1">
-              </div>
-              <h3 class="text-sm font-anton tracking-widest text-amber-100">
-                TOP NEWS
-              </h3>
+              <h2 class="text-white text-xl md:text-2xl uppercase font-light text-left ml-0 mt-2">
+                <span class="font-bold">TOP </span>  NEWS
+              </h2>
             </div>
-            <div class="w-full mr-auto ml-auto grid-cols-3 grid text-amber-50 pt-2">
-              <div class="grid grid-cols-5">
+            <div v-for="post in news" :key="post.id"  class="w-full mr-auto ml-auto md:grid-cols-3 grid-cols-1 grid text-amber-50">
+              <div class="grid md:grid-cols-4 grid-cols-1 my-4">
                 <div class="px-4 col-span-2">
                   <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg bg-cyan-600">
-                    <img alt="..."
-                         src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1051&amp;q=80"
-                         class="w-full align-middle rounded-t-lg"
-                    />
-                    <blockquote class="relative py-2 px-2">
-                      <svg
-                          preserveAspectRatio="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 583 95"
-                          class="absolute left-0 w-full block"
-                          style="height: 95px; top: -94px;"
-                      >
-                        <polygon
-                            points="-30,95 583,95 583,65"
-                            class="text-cyan-600 fill-current"
-                        ></polygon>
-                      </svg>
-                      <h4 class="text-xl font-bold text-white">
-                        Top Notch Services
-                      </h4>
-                    </blockquote>
+                    <router-link :to="{ name: 'News', params: {id: post.id, name: post.name }}" class="relative group block mr-4 flex-shrink-0">
+                      <img alt="..."
+                           src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1051&amp;q=80"
+                           class="w-full align-middle rounded-t-lg"
+                      />
+                      <blockquote class="relative py-2 px-2">
+                        <svg
+                            preserveAspectRatio="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 583 95"
+                            class="absolute left-0 w-full block"
+                            style="height: 95px; top: -94px;"
+                        >
+                          <polygon
+                              points="-30,95 583,95 583,65"
+                              class="text-cyan-600 fill-current"
+                          ></polygon>
+                        </svg>
+                        <h4 class="text-xl font-bold text-white">
+                          {{ post.name }}
+                        </h4>
+                      </blockquote>
+                    </router-link>
                   </div>
                 </div>
                 <div class="px-4 col-span-3">
                   <p class="text-lg font-light leading-relaxed">
-                    Don't let your uses guess by attaching tooltips and popoves to
-                    any element. Just make sure you enable them first via
-                    JavaScript.
-                  </p>
-                </div>
-              </div>
-              <div class="grid grid-cols-5">
-                <div class="px-4 col-span-2">
-                  <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg bg-cyan-600">
-                    <img alt="..."
-                         src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1051&amp;q=80"
-                         class="w-full align-middle rounded-t-lg"
-                    />
-                    <blockquote class="relative py-2 px-2">
-                      <svg
-                          preserveAspectRatio="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 583 95"
-                          class="absolute left-0 w-full block"
-                          style="height: 95px; top: -94px;"
-                      >
-                        <polygon
-                            points="-30,95 583,95 583,65"
-                            class="text-cyan-600 fill-current"
-                        ></polygon>
-                      </svg>
-                      <h4 class="text-xl font-bold text-white">
-                        Top Notch Services
-                      </h4>
-                    </blockquote>
-                  </div>
-                </div>
-                <div class="px-4 col-span-3">
-                  <p class="text-lg font-light leading-relaxed">
-                    Don't let your uses guess by attaching tooltips and popoves to
-                    any element. Just make sure you enable them first via
-                    JavaScript.
+                    {{ post.content }}
                   </p>
                 </div>
               </div>
@@ -262,6 +161,7 @@
 import {onMounted, ref} from 'vue';
 
 import getMovies from '../composables/getMoviesFromApi'
+import getNews from '../composables/getNews'
 
 // component imports
 import Spinner from '@/components/Spinner.vue'
@@ -284,6 +184,7 @@ export default {
     const page = ref( 1 )
     const urlGen = `https://api.themoviedb.org/3/discover/movie?api_key=${props.env.tmdb_api_key}`;
     const { movies: moviesGen, error, load } = getMovies()
+    const { news, errorN, loadN } = getNews()
     const specGenre = ref( {id:0, name:'All'} )
     const specGenreAssigned = ref({id:0, name:'All'});
     const searchQuery = ref("");
@@ -292,7 +193,8 @@ export default {
     const genres = ref([]);
     const show = ref(true);
     const showGenres = ref(false);
-
+    loadN()
+    console.log(news.value)
     load( urlGen, page, specGenre.value)
     const MoviesNextPage = () => {
       page.value ++
@@ -348,7 +250,7 @@ export default {
         });
 
 
-    return { moviesGen, error, SearchMovies, genres, GenresBlock, filterByGenre, page, searchTriggered, MoviesNextPage, MoviesPrevPage, searchQuery, specGenreAssigned, show, opt_class, showGenres}
+    return { moviesGen, error, SearchMovies, genres, GenresBlock, filterByGenre, page, searchTriggered, MoviesNextPage, MoviesPrevPage, searchQuery, specGenreAssigned, show, opt_class, showGenres, errorN, news, loadN}
   },
 }
 </script>
