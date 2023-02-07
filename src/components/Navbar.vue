@@ -23,6 +23,9 @@
           <RouterLink to="/theatres">In Theatres</RouterLink>
         </li>
         <li class="md:px-1 py-2">
+          <RouterLink to="/news" >Top News</RouterLink>
+        </li>
+        <li class="md:px-1 py-2">
           <RouterLink to="/about" >About Us</RouterLink>
         </li>
       </ul>
@@ -70,6 +73,9 @@
         </li>
         <li class="md:px-1 py-2">
           <RouterLink to="/theatres" >In Theatres</RouterLink>
+        </li>
+        <li class="md:px-1 py-2">
+          <RouterLink to="/news" >Top News</RouterLink>
         </li>
         <li class="md:px-1 py-2">
           <RouterLink to="/about" >About Us</RouterLink>

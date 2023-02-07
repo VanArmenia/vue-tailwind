@@ -118,7 +118,7 @@
     </main>
 </template>
 <script>
-import {onMounted, ref} from 'vue';
+import {ref} from 'vue';
 
 import getMovies from '../composables/getMoviesFromApi'
 
