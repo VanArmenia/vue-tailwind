@@ -61,49 +61,9 @@
               <h2 class="text-white text-xl md:text-2xl uppercase font-light text-left m-6 ml-0 mt-2"><span class="font-bold">Explore </span>what’s streaming</h2>
             </template>
           </Providers>
-          <div v-if="news" class="news flex flex-wrap mt-16 py-1 bg-lighter-amber">
-            <div class="flex p-4 pt-1">
-              <h2 class="text-white text-xl md:text-2xl uppercase font-light text-left ml-0 mt-2">
-                <span class="font-bold">TOP </span>  NEWS
-              </h2>
-            </div>
-            <div v-for="post in news" :key="post.id"  class="w-full mr-auto ml-auto md:grid-cols-3 grid-cols-1 grid text-amber-50">
-              <div class="grid md:grid-cols-4 grid-cols-1 my-4">
-                <div class="px-4 col-span-2">
-                  <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg bg-cyan-600">
-                    <router-link :to="{ name: 'News', params: {id: post.id, name: post.name }}" class="relative group block mr-4 flex-shrink-0">
-                      <img alt="..."
-                           src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1051&amp;q=80"
-                           class="w-full align-middle rounded-t-lg"
-                      />
-                      <blockquote class="relative py-2 px-2">
-                        <svg
-                            preserveAspectRatio="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 583 95"
-                            class="absolute left-0 w-full block"
-                            style="height: 95px; top: -94px;"
-                        >
-                          <polygon
-                              points="-30,95 583,95 583,65"
-                              class="text-cyan-600 fill-current"
-                          ></polygon>
-                        </svg>
-                        <h4 class="text-xl font-bold text-white">
-                          {{ post.name }}
-                        </h4>
-                      </blockquote>
-                    </router-link>
-                  </div>
-                </div>
-                <div class="px-4 col-span-3">
-                  <p class="text-lg font-light leading-relaxed">
-                    {{ post.content }}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+
+          <News />
+
         </div>
       </section>
 
@@ -161,10 +121,10 @@
 import {onMounted, ref} from 'vue';
 
 import getMovies from '../composables/getMoviesFromApi'
-import getNews from '../composables/getNews'
 
 // component imports
 import Spinner from '@/components/Spinner.vue'
+import News from '@/components/News.vue'
 import Search from '@/components/Search.vue'
 import GenresBlock from '@/components/extras/Genres.vue'
 import Upcoming from '@/components/extras/Upcoming.vue'
@@ -175,7 +135,7 @@ import MovieList from "@/components/movie/MovieList.vue";
 export default {
   name: "landing-page",
   components: {
-    Spinner, GenresBlock, Search, Upcoming, Providers, MovieList
+    Spinner, GenresBlock, Search, Upcoming, Providers, MovieList, News
   },
   props: {
     env: Object,
@@ -184,7 +144,6 @@ export default {
     const page = ref( 1 )
     const urlGen = `https://api.themoviedb.org/3/discover/movie?api_key=${props.env.tmdb_api_key}`;
     const { movies: moviesGen, error, load } = getMovies()
-    const { news, errorN, loadN } = getNews()
     const specGenre = ref( {id:0, name:'All'} )
     const specGenreAssigned = ref({id:0, name:'All'});
     const searchQuery = ref("");
@@ -193,8 +152,7 @@ export default {
     const genres = ref([]);
     const show = ref(true);
     const showGenres = ref(false);
-    loadN()
-    console.log(news.value)
+
     load( urlGen, page, specGenre.value)
     const MoviesNextPage = () => {
       page.value ++
@@ -250,7 +208,7 @@ export default {
         });
 
 
-    return { moviesGen, error, SearchMovies, genres, GenresBlock, filterByGenre, page, searchTriggered, MoviesNextPage, MoviesPrevPage, searchQuery, specGenreAssigned, show, opt_class, showGenres, errorN, news, loadN}
+    return { moviesGen, error, SearchMovies, genres, GenresBlock, filterByGenre, page, searchTriggered, MoviesNextPage, MoviesPrevPage, searchQuery, specGenreAssigned, show, opt_class, showGenres}
   },
 }
 </script>
