@@ -1,7 +1,7 @@
 <template>
   <div class="fixed z-10 top-0 left-0 w-full h-full bg-neutral-900 flex flex-row justify-around transition-opacity duration-300 bg-opacity-60 p-10">
-    <div class="w-1/2">
-      <div class="bg-amber-50 top-4 p-6 rounded-md bottom-4">
+    <div class="md:w-1/2">
+      <div class="bg-amber-50 top-4 md:p-6 p-4 rounded-md bottom-4">
         <form>
           <div class="form-group mb-6">
             <input type="text" class="form-control block w-full px-3 py-1.5 text-base font-normal
@@ -23,7 +23,7 @@
           </div>
           <div class="col-span-6 sm:col-span-3">
             <label for="country" class="block text-sm font-medium text-gray-400">Tags</label>
-            <select id="country" name="country" autocomplete="country" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-900">
+            <select id="country" multiple name="country" autocomplete="country" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-900">
               <option>Artists</option>
               <option>Directors</option>
               <option>Short movie</option>
