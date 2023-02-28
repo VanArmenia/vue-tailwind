@@ -37,12 +37,16 @@ export default {
   setup() {
     const path = ref("");
 
+    const close = () => {
+      showModal.value = false
+    }
+
     onMounted(() => {
       getDownloadURL(refStorage(storage, 'images/star.jpg'))
           .then((url) => {
 
             path.value = url
-            
+
           })
           .catch((error) => {
             // Handle any errors
@@ -54,7 +58,7 @@ export default {
     const showModal = ref(false);
 
 
-    return { showModal, path}
+    return { showModal, path, close}
   },
 }
 </script>

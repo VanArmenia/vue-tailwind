@@ -8,6 +8,8 @@ import Genres from '../views/Genres.vue'
 import About from '../views/About.vue'
 import InTheatres from '../views/InTheatres.vue'
 import Stream from '../views/Stream.vue'
+import Login from "../views/auth/Login.vue";
+import Register from "../views/auth/Register.vue";
 
 
 const router = createRouter({
@@ -23,7 +25,7 @@ const router = createRouter({
       name: 'home',
       component: HomeView,
       meta: {
-        title: 'Movie Finder - Home',
+        title: 'Movie Finder | Home',
         description: 'Website to find the movies in theatres next to you'
       }
     },
@@ -32,7 +34,7 @@ const router = createRouter({
       name: 'Details',
       component: Details,
       meta: {
-        title: 'Movie Finder - Movie'
+        title: 'Movie Finder'
       }
     },
     {
@@ -66,7 +68,7 @@ const router = createRouter({
       component: Stream,
       props: true,
       meta: {
-        title: 'Movie Finder - Movie'
+        title: 'Movie Finder'
       }
     },
     {
@@ -95,6 +97,24 @@ const router = createRouter({
       meta: {
         title: 'Movie Finder - Movie'
       }
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login,
+      props: true,
+      meta: {
+        title: 'Movie Finder - Movie'
+      }
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: Register,
+      props: true,
+      meta: {
+        title: 'Movie Finder - Movie'
+      }
     }
   ]
 })
@@ -103,10 +123,13 @@ router.beforeEach((to, from, next) => {
   console.log(to)
   let docTitle = `${to.meta.title}`
   if (to.params.title){
-    docTitle += `- ${to.params.title}`
+    docTitle += ` | ${to.params.title}`
   }
   if (to.params.name){
-    docTitle += `- ${to.params.name}`
+    docTitle += ` | ${to.params.name}`
+  }
+  if (to.params.provider){
+    docTitle += ` | ${to.params.provider}`
   }
   document.title = docTitle;
   next();
