@@ -75,7 +75,6 @@
 </template>
 
 <script>
-import { useRoute } from 'vue-router'
 import ct from  'countries-and-timezones'
 // component imports
 
@@ -85,12 +84,12 @@ import {computed, ref} from "vue";
 export default {
   props: {
     env: Object,
+    id: Number,
   },
   components: { Spinner,Slider },
 
   setup(props) {
 
-    const route = useRoute()
     const movie = ref( {} )
     const providers = ref( {} )
     const providersFiltered = ref( {} )
@@ -118,10 +117,11 @@ export default {
     // fetching specific movie from Themoviedb
     const fetchMovie = () => {
       try {
-         fetch(`https://api.themoviedb.org/3/movie/${route.params.id}?api_key=${props.env.tmdb_api_key}&language=en-US`)
+         fetch(`https://api.themoviedb.org/3/movie/${props.id}?api_key=${props.env.tmdb_api_key}&language=en-US`)
             .then(response => response.json())
             .then(data => {
               movie.value = data;
+              console.log(movie.value)
             });
 
       }
@@ -134,7 +134,7 @@ export default {
     // fetching similar movies
     const similarMovies = () => {
       try {
-      fetch(`https://api.themoviedb.org/3/movie/${route.params.id}/similar?api_key=${props.env.tmdb_api_key}&language=en-US`)
+      fetch(`https://api.themoviedb.org/3/movie/${props.id}/similar?api_key=${props.env.tmdb_api_key}&language=en-US`)
             .then(response => response.json())
             .then(data => {
               simMovies.value = data;
@@ -148,7 +148,7 @@ export default {
 
     // fetching movie crew from Themoviedb
     try {
-      fetch(`https://api.themoviedb.org/3/movie/${route.params.id}/credits?api_key=${props.env.tmdb_api_key}&language=en-US`)
+      fetch(`https://api.themoviedb.org/3/movie/${props.id}/credits?api_key=${props.env.tmdb_api_key}&language=en-US`)
           .then(response => response.json())
           .then(data => {
             crew.value =  data.crew.filter(item => (item.known_for_department.includes('Directing')))[0];
@@ -163,7 +163,7 @@ export default {
 
       // fetching movie videos from Themoviedb
       try {
-        fetch(`https://api.themoviedb.org/3/movie/${route.params.id}/videos?api_key=${props.env.tmdb_api_key}&language=en-US`)
+        fetch(`https://api.themoviedb.org/3/movie/${props.id}/videos?api_key=${props.env.tmdb_api_key}&language=en-US`)
             .then(response => response.json())
             .then(data => {
               offTrailer.value = data.results.filter(item => (item.name === 'Official Trailer'))
@@ -175,7 +175,7 @@ export default {
 
       // providers
     try {
-      fetch(`https://api.themoviedb.org/3/movie/${route.params.id}/watch/providers?api_key=${props.env.tmdb_api_key}&language=en-US`)
+      fetch(`https://api.themoviedb.org/3/movie/${props.id}/watch/providers?api_key=${props.env.tmdb_api_key}&language=en-US`)
           .then(response => response.json())
           .then(data => {
             providers.value = data.results;

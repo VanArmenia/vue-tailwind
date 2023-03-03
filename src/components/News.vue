@@ -6,7 +6,6 @@
     </h2>
   </div>
 
-
     <div class="w-1/3 relative">
       <div v-if="errorN" class="text-red-500 text-xl mt-6">{{ errorN }}</div>
     </div>

@@ -10,6 +10,7 @@ import InTheatres from '../views/InTheatres.vue'
 import Stream from '../views/Stream.vue'
 import Login from "../views/auth/Login.vue";
 import Register from "../views/auth/Register.vue";
+import ForgotPassword from "../views/auth/ForgotPassword.vue";
 
 
 const router = createRouter({
@@ -33,6 +34,7 @@ const router = createRouter({
       path: '/movie/:id/:title',
       name: 'Details',
       component: Details,
+      props: true,
       meta: {
         title: 'Movie Finder'
       }
@@ -111,6 +113,15 @@ const router = createRouter({
       path: '/register',
       name: 'Register',
       component: Register,
+      props: true,
+      meta: {
+        title: 'Movie Finder - Movie'
+      }
+    },
+    {
+      path: '/forgotpassword',
+      name: 'ForgotPassword',
+      component: ForgotPassword,
       props: true,
       meta: {
         title: 'Movie Finder - Movie'

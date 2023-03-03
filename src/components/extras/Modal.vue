@@ -25,7 +25,7 @@
           </div>
           <div class="col-span-6 sm:col-span-3">
             <label for="country" class="block text-sm font-medium text-gray-400">Tags</label>
-            <select id="country" multiple name="country" autocomplete="country" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-900">
+            <select id="tag" multiple name="tag" autocomplete="tag" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-900">
               <option>Artists</option>
               <option>Directors</option>
               <option>Short movie</option>

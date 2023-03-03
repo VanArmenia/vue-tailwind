@@ -28,6 +28,12 @@
         <li class="md:px-1 py-2">
           <RouterLink to="/about" >About Us</RouterLink>
         </li>
+        <li class="md:pl-1 py-2">
+          <RouterLink class="pr-0" to="/login" >Login</RouterLink>
+        </li>
+        <li class="md:px-0 py-2">
+          <RouterLink class="pl-0" to="/register" >/Register</RouterLink>
+        </li>
       </ul>
 
     <!-- Mobile menu button -->
@@ -80,6 +86,10 @@
         <li class="md:px-1 py-2">
           <RouterLink to="/about" >About Us</RouterLink>
         </li>
+        <li class="md:px-0 py-2 inline">
+          <RouterLink class="pr-0" to="/login" >Login</RouterLink>
+        </li>
+          <RouterLink class="pl-0" to="/register" >/Register</RouterLink>
       </ul>
     </div>
     </transition>

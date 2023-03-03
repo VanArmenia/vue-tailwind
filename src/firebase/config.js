@@ -1,8 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getAuth, createUserWithEmailAndPassword  } from "firebase/auth";
 import { getStorage, getDownloadURL, ref as refStorage} from "firebase/storage";
-import { collection, getDocs, doc, getDoc, addDoc  } from 'firebase/firestore';
+import { collection, getDocs, doc, getDoc, addDoc, getFirestore  } from 'firebase/firestore';
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -18,10 +18,14 @@ const firebaseConfig = {
 // Initialize Firebase
 const firebase = initializeApp(firebaseConfig);
 
+// Initialize Firebase Authentication and get a reference to the service
+const auth = getAuth(firebase);
+
 // Create a reference with an initial file path and name
 const storage = getStorage();
 
 // Initialize Cloud Firestore and get a reference to the service
 
-export const db = getFirestore(firebase);
-export { collection, getDocs, doc, getDoc, addDoc, refStorage, storage, getDownloadURL };
+const db = getFirestore(firebase);
+
+export { collection, getDocs, doc, getDoc, addDoc, refStorage, storage, getDownloadURL, db, auth, createUserWithEmailAndPassword };
