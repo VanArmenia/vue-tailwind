@@ -11,6 +11,11 @@
               Already have an account?
               <router-link class="router-link" :to="{ name: 'Login' }"><span class="font-bold ">Login</span></router-link>
             </p>
+            <div v-if="error" class="max-w-xs mx-auto">
+              <p class="relative mb-8">
+                {{ error }}
+              </p>
+            </div>
             <div>
               <h1 class="text-2xl font-semibold">Create Your Account</h1>
             </div>
@@ -52,12 +57,13 @@
 
 <script>
 
-import { db, auth, createUserWithEmailAndPassword, doc} from '../../firebase/config'
+import { db, auth, createUserWithEmailAndPassword, addDoc, collection} from '../../firebase/config'
 import {ref} from "vue";
+import {useRouter} from "vue-router";
 
 export default ({
   setup() {
-
+    const router = useRouter()
     const user = ref(null);
     const firstName = ref("");
     const lastName = ref("");
@@ -67,28 +73,23 @@ export default ({
     const error = ref(null);
     const errorMsg = ref("");
 
-    const register = async () => {
-      error.value = false
-      errorMsg.value = ""
-      createUserWithEmailAndPassword(auth, email.value, password.value)
-          .then((userCredential) => {
-            // Signed in
-            user.value = userCredential.user;
-            // ...
-          })
-          .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            // ..
-          });
-
-      const dataBase = db.collection("users").doc(user.value.user.uid);
-      await dataBase.set({
-        firstName: firstName.value,
-        lastName: lastName.value,
-        username: username.value,
-        email: email.value,
-      });
+    const register = async  () => {
+      try {
+        const createUser = await createUserWithEmailAndPassword(auth, email.value, password.value);
+        console.log(createUser)
+        const docRef = await addDoc(collection(db, "users"), {
+          firstName: firstName.value,
+          lastName: lastName.value,
+          username: username.value,
+          email: email.value,
+        });
+        console.log(docRef)
+        router.push({name: 'home'})
+      }
+      catch(err) {
+        error.value = err.message
+        console.log( error.value)
+      }
     }
 
     return { firstName, lastName, username, email, password, error, errorMsg, register}

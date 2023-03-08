@@ -11,6 +11,11 @@
               Don't have an account?
               <router-link class="router-link" :to="{ name: 'Register' }"><span class="font-bold ">Register</span></router-link>
             </p>
+            <div v-if="error" class="max-w-xs mx-auto">
+              <p class="relative mb-8">
+                {{ error }}
+              </p>
+            </div>
             <div>
               <h1 class="text-2xl font-semibold">Login into Your Account</h1>
             </div>
@@ -31,7 +36,7 @@
                 </div>
 
                 <div class="relative">
-                  <button class="bg-cyan-500 text-white rounded-md px-2 py-1">Sign In</button>
+                  <button @click.prevent="login" class="bg-cyan-500 text-white rounded-md px-2 py-1">Sign In</button>
                 </div>
               </div>
             </div>
@@ -47,9 +52,37 @@
 <script>
 
 
+import {ref} from "vue";
+import {auth, signInWithEmailAndPassword } from "../../firebase/config";
+import {useRouter} from "vue-router";
+
 export default ({
 
   setup() {
+
+    const email = ref("");
+    const password = ref("");
+    const error = ref(null);
+    const errorMsg = ref("");
+    const user = ref(null);
+    const router = useRouter()
+
+    const login = async () => {
+      error.value = false
+      errorMsg.value = ""
+      try {
+        const loggedinUser = await signInWithEmailAndPassword(auth, email.value, password.value);
+        console.log(loggedinUser.user.uid)
+
+        router.push({name: 'home'})
+      }
+      catch(err) {
+        error.value = err.message
+        console.log( error.value)
+      }
+    }
+
+    return { email, password, error, errorMsg, login}
 
   },
 });
